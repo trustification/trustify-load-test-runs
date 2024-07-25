@@ -19,7 +19,7 @@ jobs:
         with:
           path: |
             trustify/target/
-          key: trustify-${{ hashFiles('**/Cargo.lock') }}
+          key: trustify-${{ hashFiles('trustify/**/Cargo.lock') }}
 
       - uses: actions/checkout@v4
         with:
@@ -30,7 +30,7 @@ jobs:
         with:
           path:
             scale-testing/target/
-          key: scale-testing-${{ hashFiles('**/Cargo.lock') }}
+          key: scale-testing-${{ hashFiles('scale-testing/**/Cargo.toml') }}
 
       - name: Build Trustify
         working-directory: trustify
