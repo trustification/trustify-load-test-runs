@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/trustification/trustify
+          repository: trustification/trustify
           path: trustify
 
       - uses: actions/cache@v4
@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/trustification/scale-testing
+          repository: trustification/scale-testing
           path: scale-testing
 
       - uses: actions/cache@v4
