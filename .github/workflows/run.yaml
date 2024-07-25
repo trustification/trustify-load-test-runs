@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/trustification/trustify
+          path: trustify
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            trustify/target/
+          key: trustify-${{ hashFiles('**/Cargo.lock') }}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/trustification/scale-testing
+          path: scale-testing
+
+      - uses: actions/cache@v4
+        with:
+          path:
+            scale-testing/target/
+          key: scale-testing-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build Trustify
+        working-directory: trustify
+        run: |
+          cargo build --release -p trustify-trustd
+
+      - name: Build loadtest
+        working-directory: scale-testing/loadtest
+        run: |
+          cargo build --release
