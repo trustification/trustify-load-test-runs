@@ -140,7 +140,7 @@ services:
     environment:
       ISSUER_URL: http://keycloak:8080/realms/trustify
       CLIENT_ID: walker
-      CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP
+      CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP # notsecret
     volumes:
       - ./report:/report:z
     command:
