@@ -141,6 +141,8 @@ services:
       ISSUER_URL: http://keycloak:8080/realms/trustify
       CLIENT_ID: walker
       CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP
+    volumes:
+      - ./report:/report:z
     command:
       - --host
       - http://trustify:8080
@@ -148,3 +150,5 @@ services:
       - "3"
       - --run-time
       - "1m"
+      - --report-file
+      - /report/report.html
