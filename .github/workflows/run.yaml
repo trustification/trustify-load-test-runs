@@ -41,14 +41,21 @@ jobs:
           echo "Load test failed. No report generated" >> $GITHUB_STEP_SUMMARY
 
       - name: Record test results
+        env:
+          SOURCE: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         run: |
-          cp report/report.html publish/reports/report-$(date "+%Y-%m-%d").html
+          git clone "$SOURCE" repo
+          
+          cp report/report.html repo/publish/reports/report-$(date "+%Y-%m-%d").html
+          
+          cd repo
           
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           git add -A -- publish
           git commit -m "Automatic update ($GITHUB_RUN_ID/$GITHUB_RUN_NUMBER)"
+          
           git push
 
       - name: Setup Pages
