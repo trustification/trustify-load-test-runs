@@ -1,0 +1,150 @@
+#
+# Compose setup for running load tests in a repeatable fashion.
+#
+# The idea is to run and prepare all services (db, sso, …) and then run the trustify API server and load tests.
+#
+# As all services run on the same machine, we set resource requests and limits on the postgres and trustify instance.
+# To ensure that they do get their required resources and won't get throttled due to issues with keycloak or the
+# loadtests.
+#
+
+services:
+  postgres:
+    image: docker.io/library/postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "eggs"
+      POSTGRES_DB: "trustify"
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          cpus: "2"
+          memory: 2G
+        limits:
+          cpus: "2"
+          memory: 2G
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "trustify" ]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+  keycloak:
+    image: docker.io/bitnami/keycloak:24.0.4
+    environment:
+      - KEYCLOAK_DATABASE_VENDOR=dev-file
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin123456
+      - KEYCLOAK_ENABLE_HEALTH_ENDPOINTS=true
+      - KEYCLOAK_CACHE_TYPE=local
+      - KEYCLOAK_PROXY=edge
+    ports:
+      - "8090:8080"
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+        limits:
+          memory: 512M
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health/ready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  init-keycloak:
+    image: docker.io/bitnami/keycloak:24.0.4
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    environment:
+      - KEYCLOAK_URL=http://keycloak:8080
+      - KCADM_PATH=/opt/bitnami/keycloak/bin/kcadm.sh
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin123456
+      - REALM=trustify
+      - INIT_DATA=/init-sso/data
+      - CHICKEN_ADMIN=admin
+      - CHICKEN_ADMIN_PASSWORD=admin123456
+      - REDIRECT_URIS=["http://trustify:*", "http://trustify:*/", "http://trustify:*/*"]
+      - WALKER_SECRET=R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP
+      # The internal name (between containers) is "keycloak". However, from the host it is reachable as "localhost:8090".
+      # So the "frontend" needs to be set to that
+      - SSO_FRONTEND_URL=http://trustify:8080
+    volumes:
+      - ./config/init-sso:/init-sso:z
+    entrypoint: /usr/bin/bash
+    command: /init-sso/init.sh
+
+  trustify-migrate:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    build:
+      dockerfile: ./Containerfile.trustify
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: eggs
+      DB_HOST: postgres
+      DB_NAME: trustify
+    command:
+      - db
+      - migrate
+
+  trustify:
+    depends_on:
+      trustify-migrate:
+        condition: service_completed_successfully
+      init-keycloak:
+        condition: service_completed_successfully
+    build:
+      dockerfile: ./Containerfile.trustify
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: eggs
+      DB_HOST: postgres
+      DB_NAME: trustify
+      RUST_LOG: info
+      INFRASTRUCTURE_ENABLED: "true"
+      HTTP_SERVER_BIND_ADDR: "::"
+      UI_ISSUER_URL: http://keycloak:8080/realms/trustify
+      AUTHENTICATOR_OIDC_CLIENT_IDS: frontend,walker
+      AUTHENTICATOR_OIDC_ISSUER_URL: http://keycloak:8080/realms/trustify
+    healthcheck:
+      test: "curl --fail http://localhost:9010/health/live || exit 1"
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    command:
+      - api
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        reservations:
+          cpus: "4"
+          memory: "2G"
+        limits:
+          cpus: "4"
+          memory: "2G"
+
+  loadtests:
+    depends_on:
+      trustify:
+        condition: service_healthy
+    build:
+      dockerfile: ./Containerfile.loadtests
+    environment:
+      ISSUER_URL: http://keycloak:8080/realms/trustify
+      CLIENT_ID: walker
+      CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP
+    command:
+      - --host
+      - http://trustify:8080
+      - -u
+      - "3"
+      - --run-time
+      - "1m"
