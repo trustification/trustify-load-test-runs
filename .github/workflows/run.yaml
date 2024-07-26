@@ -10,6 +10,13 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-22.04
+
+    permissions:
+      contents: write  # to be able to push changes
+      packages: read
+      pages: write     # for publishing the report
+      id-token: write  # for publishing the report
+
     steps:
       - uses: actions/checkout@v4
 
