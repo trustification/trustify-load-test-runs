@@ -39,3 +39,23 @@ jobs:
           echo "## Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Load test failed. No report generated" >> $GITHUB_STEP_SUMMARY
+
+      - name: Record test results
+        run: |
+          cp report/report.html publish/reports/report-$(date "+%Y-%m-%d").html
+          
+          git add -A -- publish
+          git commit -m "Automatic update ($GITHUB_RUN_ID/$GITHUB_RUN_NUMBER)"
+          git push
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: publish
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
