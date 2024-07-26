@@ -125,10 +125,10 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: "4"
+          cpus: "3"
           memory: "2G"
         limits:
-          cpus: "4"
+          cpus: "3"
           memory: "2G"
 
   loadtests:
