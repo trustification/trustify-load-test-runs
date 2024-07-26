@@ -18,7 +18,7 @@ jobs:
 
       - name: Run
         run: |
-          docker compose -f compose.yaml run
+          docker compose -f compose.yaml run loadtests
 
       - name: Cleanup
         if: ${{ always() }}
