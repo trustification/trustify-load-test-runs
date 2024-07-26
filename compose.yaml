@@ -149,6 +149,6 @@ services:
       - -u
       - "3"
       - --run-time
-      - "1m"
+      - "5m"
       - --report-file
       - /report/report.html
