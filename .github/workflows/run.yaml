@@ -44,6 +44,9 @@ jobs:
         run: |
           cp report/report.html publish/reports/report-$(date "+%Y-%m-%d").html
           
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
           git add -A -- publish
           git commit -m "Automatic update ($GITHUB_RUN_ID/$GITHUB_RUN_NUMBER)"
           git push
