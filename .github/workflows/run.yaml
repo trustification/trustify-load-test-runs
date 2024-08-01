@@ -64,10 +64,13 @@ jobs:
           
           cd repo
           
+          tree -H '.' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' --houtro "" -P "*.html" -D -o index.html
+          
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           git add -A -- publish
+          git add -A -- index.html
           git commit -m "Automatic update ($GITHUB_RUN_ID/$GITHUB_RUN_NUMBER)"
           
           git push
