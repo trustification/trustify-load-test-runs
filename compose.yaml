@@ -152,3 +152,5 @@ services:
       - "5m"
       - --report-file
       - /report/report.html
+      - --report-file
+      - /report/report.json
