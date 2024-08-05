@@ -78,9 +78,9 @@ jobs:
           git clone "$SOURCE" repo
           
           DATE=$(date +"%Y-%m-%dT%H-%M-%S")
-          cp report/report.html repo/publish/reports/report-${DATE}.html
-          cp report/report.json repo/publish/reports/report-${DATE}.json
-          cp report/report.json repo/publish/baseline.json
+          cp run/report/report.html repo/publish/reports/report-${DATE}.html
+          cp run/report/report.json repo/publish/reports/report-${DATE}.json
+          cp run/report/report.json repo/publish/baseline.json
           
           pushd repo/publish/reports
           
