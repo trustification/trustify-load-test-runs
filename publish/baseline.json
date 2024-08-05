@@ -1,0 +1,1446 @@
+{
+  "raw_metrics": {
+    "hash": 0,
+    "duration": 300,
+    "maximum_users": 3,
+    "total_users": 3,
+    "requests": {
+      "GET /packages": {
+        "path": "/packages",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "0": 1,
+            "1": 4
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 4,
+          "counter": 5
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 5
+        },
+        "success_count": 5,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/purl": {
+        "path": "/api/v1/purl",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "2": 1,
+            "4": 3
+          },
+          "minimum_time": 2,
+          "maximum_time": 4,
+          "total_time": 14,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/importer": {
+        "path": "/api/v1/importer",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "1": 4
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 4,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/purl?q=curl": {
+        "path": "/api/v1/purl?q=curl",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "2": 1,
+            "3": 1,
+            "4": 2
+          },
+          "minimum_time": 2,
+          "maximum_time": 4,
+          "total_time": 13,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /index": {
+        "path": "/index",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "1": 4
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 4,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /sboms": {
+        "path": "/sboms",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "1": 5
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 5,
+          "counter": 5
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 5
+        },
+        "success_count": 5,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/organization": {
+        "path": "/api/v1/organization",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "2": 3
+          },
+          "minimum_time": 2,
+          "maximum_time": 2,
+          "total_time": 6,
+          "counter": 3
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 3
+        },
+        "success_count": 3,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/advisory": {
+        "path": "/api/v1/advisory",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "2": 1,
+            "4": 1,
+            "5": 2
+          },
+          "minimum_time": 2,
+          "maximum_time": 5,
+          "total_time": 16,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/vulnerability": {
+        "path": "/api/v1/vulnerability",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "4": 1,
+            "5": 3
+          },
+          "minimum_time": 4,
+          "maximum_time": 5,
+          "total_time": 19,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/sbom": {
+        "path": "/api/v1/sbom",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "3": 1,
+            "4": 2
+          },
+          "minimum_time": 3,
+          "maximum_time": 4,
+          "total_time": 11,
+          "counter": 3
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 3
+        },
+        "success_count": 3,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /api/v1/product": {
+        "path": "/api/v1/product",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "2": 4
+          },
+          "minimum_time": 2,
+          "maximum_time": 2,
+          "total_time": 8,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /advisories": {
+        "path": "/advisories",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "0": 1,
+            "1": 4
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 4,
+          "counter": 5
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 5
+        },
+        "success_count": 5,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "GET /openapi": {
+        "path": "/openapi",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "1": 5
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 5,
+          "counter": 5
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 5
+        },
+        "success_count": 5,
+        "fail_count": 0,
+        "load_test_hash": 0
+      },
+      "POST query advisory with /graphql": {
+        "path": "query advisory with /graphql",
+        "method": "Post",
+        "raw_data": {
+          "times": {
+            "1": 31
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 31,
+          "counter": 31
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 30,
+          "401": 1
+        },
+        "success_count": 30,
+        "fail_count": 1,
+        "load_test_hash": 0
+      },
+      "GET /importers": {
+        "path": "/importers",
+        "method": "Get",
+        "raw_data": {
+          "times": {
+            "0": 1,
+            "1": 3
+          },
+          "minimum_time": 1,
+          "maximum_time": 1,
+          "total_time": 3,
+          "counter": 4
+        },
+        "coordinated_omission_data": null,
+        "status_code_counts": {
+          "200": 4
+        },
+        "success_count": 4,
+        "fail_count": 0,
+        "load_test_hash": 0
+      }
+    },
+    "transactions": [
+      [
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 0,
+          "transaction_name": "logon",
+          "times": {},
+          "min_time": 0,
+          "max_time": 0,
+          "total_time": 0,
+          "counter": 0,
+          "success_count": 0,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 1,
+          "transaction_name": "/index",
+          "times": {
+            "1": 4
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 4,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 2,
+          "transaction_name": "/openapi",
+          "times": {
+            "1": 5
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 5,
+          "counter": 5,
+          "success_count": 5,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 3,
+          "transaction_name": "/sboms",
+          "times": {
+            "1": 5
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 5,
+          "counter": 5,
+          "success_count": 5,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 4,
+          "transaction_name": "/packages",
+          "times": {
+            "0": 1,
+            "1": 4
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 4,
+          "counter": 5,
+          "success_count": 5,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 5,
+          "transaction_name": "/advisories",
+          "times": {
+            "0": 1,
+            "1": 4
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 4,
+          "counter": 5,
+          "success_count": 5,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 0,
+          "scenario_name": "WebsiteUser",
+          "transaction_index": 6,
+          "transaction_name": "/importers",
+          "times": {
+            "0": 1,
+            "1": 3
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 3,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        }
+      ],
+      [
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 0,
+          "transaction_name": "logon",
+          "times": {},
+          "min_time": 0,
+          "max_time": 0,
+          "total_time": 0,
+          "counter": 0,
+          "success_count": 0,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 1,
+          "transaction_name": "/api/v1/organization",
+          "times": {
+            "2": 3
+          },
+          "min_time": 2,
+          "max_time": 2,
+          "total_time": 6,
+          "counter": 3,
+          "success_count": 3,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 2,
+          "transaction_name": "/api/v1/advisory",
+          "times": {
+            "2": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1
+          },
+          "min_time": 2,
+          "max_time": 6,
+          "total_time": 17,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 3,
+          "transaction_name": "/api/v1/vulnerability",
+          "times": {
+            "4": 1,
+            "5": 3
+          },
+          "min_time": 4,
+          "max_time": 5,
+          "total_time": 19,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 4,
+          "transaction_name": "/api/v1/importer",
+          "times": {
+            "1": 4
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 4,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 5,
+          "transaction_name": "/api/v1/purl",
+          "times": {
+            "2": 1,
+            "4": 3
+          },
+          "min_time": 2,
+          "max_time": 4,
+          "total_time": 14,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 6,
+          "transaction_name": "/api/v1/purl?q=curl",
+          "times": {
+            "2": 1,
+            "3": 1,
+            "4": 2
+          },
+          "min_time": 2,
+          "max_time": 4,
+          "total_time": 13,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 7,
+          "transaction_name": "/api/v1/product",
+          "times": {
+            "2": 4
+          },
+          "min_time": 2,
+          "max_time": 2,
+          "total_time": 8,
+          "counter": 4,
+          "success_count": 4,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 1,
+          "scenario_name": "RestAPIUser",
+          "transaction_index": 8,
+          "transaction_name": "/api/v1/sbom",
+          "times": {
+            "3": 1,
+            "4": 2
+          },
+          "min_time": 3,
+          "max_time": 4,
+          "total_time": 11,
+          "counter": 3,
+          "success_count": 3,
+          "fail_count": 0
+        }
+      ],
+      [
+        {
+          "scenario_index": 2,
+          "scenario_name": "GraphQLUser",
+          "transaction_index": 0,
+          "transaction_name": "logon",
+          "times": {},
+          "min_time": 0,
+          "max_time": 0,
+          "total_time": 0,
+          "counter": 0,
+          "success_count": 0,
+          "fail_count": 0
+        },
+        {
+          "scenario_index": 2,
+          "scenario_name": "GraphQLUser",
+          "transaction_index": 1,
+          "transaction_name": "query advisory with /graphql",
+          "times": {
+            "1": 31
+          },
+          "min_time": 1,
+          "max_time": 1,
+          "total_time": 31,
+          "counter": 31,
+          "success_count": 31,
+          "fail_count": 0
+        }
+      ]
+    ],
+    "scenarios": [
+      {
+        "index": 0,
+        "name": "WebsiteUser",
+        "users": [
+          2
+        ],
+        "times": {
+          "580": 1,
+          "610": 2,
+          "720": 1
+        },
+        "min_time": 58324,
+        "max_time": 71862,
+        "total_time": 252312,
+        "counter": 4
+      },
+      {
+        "index": 1,
+        "name": "RestAPIUser",
+        "users": [
+          1
+        ],
+        "times": {
+          "750": 1,
+          "760": 1,
+          "920": 1
+        },
+        "min_time": 75123,
+        "max_time": 92196,
+        "total_time": 243397,
+        "counter": 3
+      },
+      {
+        "index": 2,
+        "name": "GraphQLUser",
+        "users": [
+          0
+        ],
+        "times": {
+          "60": 8,
+          "70": 3,
+          "80": 3,
+          "90": 3,
+          "100": 1,
+          "110": 1,
+          "120": 2,
+          "130": 6,
+          "140": 4
+        },
+        "min_time": 5841,
+        "max_time": 14442,
+        "total_time": 300898,
+        "counter": 31
+      }
+    ],
+    "errors": {
+      "401 Unauthorized: query advisory with /graphql.POST.query advisory with /graphql": {
+        "method": "Post",
+        "name": "query advisory with /graphql",
+        "error": "401 Unauthorized: query advisory with /graphql",
+        "occurrences": 1
+      }
+    },
+    "hosts": [
+      "http://trustify:8080/"
+    ],
+    "final_metrics": true,
+    "display_status_codes": true,
+    "display_metrics": true
+  },
+  "raw_request_metrics": [
+    {
+      "method": "GET",
+      "name": "/advisories",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 0.8,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/advisory",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 4.0,
+      "response_time_minimum": 2,
+      "response_time_maximum": 5,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/importer",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/organization",
+      "number_of_requests": 3,
+      "number_of_failures": 0,
+      "response_time_average": 2.0,
+      "response_time_minimum": 2,
+      "response_time_maximum": 2,
+      "requests_per_second": 0.01,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/product",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 2.0,
+      "response_time_minimum": 2,
+      "response_time_maximum": 2,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 3.5,
+      "response_time_minimum": 2,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl?q=curl",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 3.25,
+      "response_time_minimum": 2,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/sbom",
+      "number_of_requests": 3,
+      "number_of_failures": 0,
+      "response_time_average": 3.6666667,
+      "response_time_minimum": 3,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.01,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/vulnerability",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 4.75,
+      "response_time_minimum": 4,
+      "response_time_maximum": 5,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/importers",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 0.75,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/index",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/openapi",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/packages",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 0.8,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "GET",
+      "name": "/sboms",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "method": "POST",
+      "name": "query advisory with /graphql",
+      "number_of_requests": 31,
+      "number_of_failures": 1,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.10333333,
+      "failures_per_second": 0.0033333334
+    },
+    {
+      "method": "",
+      "name": "Aggregated",
+      "number_of_requests": 89,
+      "number_of_failures": 1,
+      "response_time_average": 1.6516854,
+      "response_time_minimum": 1,
+      "response_time_maximum": 5,
+      "requests_per_second": 0.29666665,
+      "failures_per_second": 0.0033333334
+    }
+  ],
+  "raw_response_metrics": [
+    {
+      "method": "GET",
+      "name": "/advisories",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/advisory",
+      "percentile_50": 4,
+      "percentile_60": 4,
+      "percentile_70": 5,
+      "percentile_80": 5,
+      "percentile_90": 5,
+      "percentile_95": 5,
+      "percentile_99": 5,
+      "percentile_100": 5
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/importer",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/organization",
+      "percentile_50": 2,
+      "percentile_60": 2,
+      "percentile_70": 2,
+      "percentile_80": 2,
+      "percentile_90": 2,
+      "percentile_95": 2,
+      "percentile_99": 2,
+      "percentile_100": 2
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/product",
+      "percentile_50": 2,
+      "percentile_60": 2,
+      "percentile_70": 2,
+      "percentile_80": 2,
+      "percentile_90": 2,
+      "percentile_95": 2,
+      "percentile_99": 2,
+      "percentile_100": 2
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl",
+      "percentile_50": 4,
+      "percentile_60": 4,
+      "percentile_70": 4,
+      "percentile_80": 4,
+      "percentile_90": 4,
+      "percentile_95": 4,
+      "percentile_99": 4,
+      "percentile_100": 4
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl?q=curl",
+      "percentile_50": 3,
+      "percentile_60": 3,
+      "percentile_70": 4,
+      "percentile_80": 4,
+      "percentile_90": 4,
+      "percentile_95": 4,
+      "percentile_99": 4,
+      "percentile_100": 4
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/sbom",
+      "percentile_50": 4,
+      "percentile_60": 4,
+      "percentile_70": 4,
+      "percentile_80": 4,
+      "percentile_90": 4,
+      "percentile_95": 4,
+      "percentile_99": 4,
+      "percentile_100": 4
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/vulnerability",
+      "percentile_50": 5,
+      "percentile_60": 5,
+      "percentile_70": 5,
+      "percentile_80": 5,
+      "percentile_90": 5,
+      "percentile_95": 5,
+      "percentile_99": 5,
+      "percentile_100": 5
+    },
+    {
+      "method": "GET",
+      "name": "/importers",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/index",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/openapi",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/packages",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "GET",
+      "name": "/sboms",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "POST",
+      "name": "query advisory with /graphql",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 1,
+      "percentile_90": 1,
+      "percentile_95": 1,
+      "percentile_99": 1,
+      "percentile_100": 1
+    },
+    {
+      "method": "",
+      "name": "Aggregated",
+      "percentile_50": 1,
+      "percentile_60": 1,
+      "percentile_70": 1,
+      "percentile_80": 2,
+      "percentile_90": 4,
+      "percentile_95": 5,
+      "percentile_99": 5,
+      "percentile_100": 5
+    }
+  ],
+  "co_request_metrics": null,
+  "co_response_metrics": null,
+  "scenario_metrics": [
+    {
+      "name": "WebsiteUser",
+      "users": 1,
+      "count": 4,
+      "response_time_average": 63078.0,
+      "response_time_minimum": 58324,
+      "response_time_maximum": 71862,
+      "count_per_second": 0.013333334,
+      "iterations": 4.0
+    },
+    {
+      "name": "RestAPIUser",
+      "users": 1,
+      "count": 3,
+      "response_time_average": 81132.336,
+      "response_time_minimum": 75123,
+      "response_time_maximum": 92196,
+      "count_per_second": 0.01,
+      "iterations": 3.0
+    },
+    {
+      "name": "GraphQLUser",
+      "users": 1,
+      "count": 31,
+      "response_time_average": 9706.387,
+      "response_time_minimum": 5841,
+      "response_time_maximum": 14442,
+      "count_per_second": 0.10333333,
+      "iterations": 31.0
+    },
+    {
+      "name": "Aggregated",
+      "users": 3,
+      "count": 38,
+      "response_time_average": 20963.342,
+      "response_time_minimum": 5841,
+      "response_time_maximum": 92196,
+      "count_per_second": 0.12666667,
+      "iterations": 38.0
+    }
+  ],
+  "transaction_metrics": [
+    {
+      "is_scenario": true,
+      "transaction": "",
+      "name": "WebsiteUser",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": null,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": null,
+      "failures_per_second": null
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.0",
+      "name": "logon",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": 0.0,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": 0.0,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.1",
+      "name": "/index",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.2",
+      "name": "/openapi",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.3",
+      "name": "/sboms",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.4",
+      "name": "/packages",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 0.8,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.5",
+      "name": "/advisories",
+      "number_of_requests": 5,
+      "number_of_failures": 0,
+      "response_time_average": 0.8,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.016666668,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "0.6",
+      "name": "/importers",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 0.75,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": true,
+      "transaction": "",
+      "name": "RestAPIUser",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": null,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": null,
+      "failures_per_second": null
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.0",
+      "name": "logon",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": 0.0,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": 0.0,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.1",
+      "name": "/api/v1/organization",
+      "number_of_requests": 3,
+      "number_of_failures": 0,
+      "response_time_average": 2.0,
+      "response_time_minimum": 2,
+      "response_time_maximum": 2,
+      "requests_per_second": 0.01,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.2",
+      "name": "/api/v1/advisory",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 4.25,
+      "response_time_minimum": 2,
+      "response_time_maximum": 6,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.3",
+      "name": "/api/v1/vulnerability",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 4.75,
+      "response_time_minimum": 4,
+      "response_time_maximum": 5,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.4",
+      "name": "/api/v1/importer",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.5",
+      "name": "/api/v1/purl",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 3.5,
+      "response_time_minimum": 2,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.6",
+      "name": "/api/v1/purl?q=curl",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 3.25,
+      "response_time_minimum": 2,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.7",
+      "name": "/api/v1/product",
+      "number_of_requests": 4,
+      "number_of_failures": 0,
+      "response_time_average": 2.0,
+      "response_time_minimum": 2,
+      "response_time_maximum": 2,
+      "requests_per_second": 0.013333334,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "1.8",
+      "name": "/api/v1/sbom",
+      "number_of_requests": 3,
+      "number_of_failures": 0,
+      "response_time_average": 3.6666667,
+      "response_time_minimum": 3,
+      "response_time_maximum": 4,
+      "requests_per_second": 0.01,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": true,
+      "transaction": "",
+      "name": "GraphQLUser",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": null,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": null,
+      "failures_per_second": null
+    },
+    {
+      "is_scenario": false,
+      "transaction": "2.0",
+      "name": "logon",
+      "number_of_requests": 0,
+      "number_of_failures": 0,
+      "response_time_average": 0.0,
+      "response_time_minimum": 0,
+      "response_time_maximum": 0,
+      "requests_per_second": 0.0,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "2.1",
+      "name": "query advisory with /graphql",
+      "number_of_requests": 31,
+      "number_of_failures": 0,
+      "response_time_average": 1.0,
+      "response_time_minimum": 1,
+      "response_time_maximum": 1,
+      "requests_per_second": 0.10333333,
+      "failures_per_second": 0.0
+    },
+    {
+      "is_scenario": false,
+      "transaction": "",
+      "name": "Aggregated",
+      "number_of_requests": 89,
+      "number_of_failures": 0,
+      "response_time_average": 1.6516854,
+      "response_time_minimum": 1,
+      "response_time_maximum": 6,
+      "requests_per_second": 0.29666665,
+      "failures_per_second": 0.0
+    }
+  ],
+  "status_code_metrics": [
+    {
+      "method": "GET",
+      "name": "/advisories",
+      "status_codes": "5 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/advisory",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/importer",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/organization",
+      "status_codes": "3 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/product",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/purl?q=curl",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/sbom",
+      "status_codes": "3 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/vulnerability",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/importers",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/index",
+      "status_codes": "4 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/openapi",
+      "status_codes": "5 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/packages",
+      "status_codes": "5 [200]"
+    },
+    {
+      "method": "GET",
+      "name": "/sboms",
+      "status_codes": "5 [200]"
+    },
+    {
+      "method": "POST",
+      "name": "query advisory with /graphql",
+      "status_codes": "30 [200], 1 [401]"
+    },
+    {
+      "method": "",
+      "name": "Aggregated",
+      "status_codes": "88 [200], 1 [401]"
+    }
+  ],
+  "errors": [
+    {
+      "method": "Post",
+      "name": "query advisory with /graphql",
+      "error": "401 Unauthorized: query advisory with /graphql",
+      "occurrences": 1
+    }
+  ]
+}
