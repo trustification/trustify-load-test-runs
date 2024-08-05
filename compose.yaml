@@ -144,6 +144,7 @@ services:
       CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP # notsecret
     volumes:
       - ./report:/report:z
+      - ./baseline:/baseline:z
     command:
       - --host
       - http://trustify:8080
@@ -155,3 +156,5 @@ services:
       - /report/report.html
       - --report-file
       - /report/report.json
+      - --baseline-file
+      - /baseline/baseline.json

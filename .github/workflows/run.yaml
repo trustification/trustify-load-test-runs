@@ -24,6 +24,12 @@ jobs:
         with:
           path: run
 
+      - name: Provide baseline
+        working-directory: run
+        run: |
+          mkdir baseline
+          cp publish/baseline.json baseline/ 
+
       - name: Build Containers
         working-directory: run
         run: |
