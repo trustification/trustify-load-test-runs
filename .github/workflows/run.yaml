@@ -75,9 +75,9 @@ jobs:
           cp report/report.json repo/publish/reports/report-${DATE}.json
           cp report/report.json repo/publish/baseline.json
           
-          pushd repo/publish
+          pushd repo/publish/reports
           
-          tree -H '.' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' -P "*.html" -D -o index.html
+          tree -H 'reports' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' -P "*.html" -D -o ../index.html
           
           popd
           
