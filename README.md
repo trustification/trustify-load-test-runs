@@ -7,7 +7,7 @@ The goal is to have load tests, which can be re-run over time to see the evoluti
 Build the containers once:
 
 ```bash
-podman compose -f compose.yaml build loadtests
+podman compose -f compose.yaml build
 ```
 
 Then run the test:
