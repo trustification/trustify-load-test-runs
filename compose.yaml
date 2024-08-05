@@ -86,6 +86,7 @@ services:
     build:
       dockerfile: ./Containerfile.trustify
     environment:
+      RUST_LOG: debug
       DB_USER: postgres
       DB_PASSWORD: eggs
       DB_HOST: postgres
