@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Goose Attack Report</title>
+    <style>
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #173529;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .info span{
+            color: #b3c3bc;
+        }
+
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+
+        thead th {
+            background-color: #cce8eb;
+            width: 100px;
+        }
+
+        tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f5fafa;
+        }
+
+        .charts-container .chart {
+            width: 100%;
+            height: 350px;
+            margin-bottom: 30px;
+        }
+
+        .download {
+            float: right;
+        }
+
+        .download a {
+            color: #00ca5a;
+        }
+
+        .graph {
+            margin-bottom: 1em;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Goose Attack Report</h1>
+
+        <div class="info">
+            <p>Users: <span>3</span> </p>
+            <p>Target Host: <span>http://trustify:8080/</span></p>
+            <p><span><small><em>goose v0.17.3-dev</em></small></span></p>
+            <h2>Plan overview</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Started</th>
+                            <th>Stopped</th>
+                            <th>Elapsed</th>
+                            <th>Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Increasing</td><td>24-08-05 13:08:44</td><td>24-08-05 13:08:47</td><td>00:00:03</td><td>0 &rarr; 3</td></tr><tr><td>Maintaining</td><td>24-08-05 13:08:47</td><td>24-08-05 13:13:47</td><td>00:05:00</td><td>3</td></tr><tr><td>Decreasing</td><td>24-08-05 13:13:47</td><td>24-08-05 13:13:47</td><td>00:00:00</td><td>0 &larr; 3</td></tr>
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="requests">
+            <h2>Request Metrics</h2>
+
+            <div class="graph">
+                <div id="graph-rps" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-rps');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Requests #',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        legend: {
+                            type: 'scroll',
+                            width: '75%',
+                            data: ["Total","POST query advisory with /graphql","GET /sboms","GET /packages","GET /openapi","GET /index","GET /advisories","GET /importers","GET /api/v1/vulnerability","GET /api/v1/purl","GET /api/v1/organization","GET /api/v1/importer","GET /api/v1/advisory","GET /api/v1/sbom","GET /api/v1/purl?q=curl","GET /api/v1/product"],
+                        },
+                        series: [
+                            {
+                                name: 'Total',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:08:44",1],["2024-08-05 13:08:45",1],["2024-08-05 13:08:46",1],["2024-08-05 13:08:49",1],["2024-08-05 13:08:50",1],["2024-08-05 13:08:54",1],["2024-08-05 13:09:00",1],["2024-08-05 13:09:01",1],["2024-08-05 13:09:04",1],["2024-08-05 13:09:05",1],["2024-08-05 13:09:15",2],["2024-08-05 13:09:18",1],["2024-08-05 13:09:25",1],["2024-08-05 13:09:30",1],["2024-08-05 13:09:31",1],["2024-08-05 13:09:35",1],["2024-08-05 13:09:42",1],["2024-08-05 13:09:44",1],["2024-08-05 13:09:48",1],["2024-08-05 13:09:53",1],["2024-08-05 13:09:54",1],["2024-08-05 13:09:59",1],["2024-08-05 13:10:03",1],["2024-08-05 13:10:06",1],["2024-08-05 13:10:10",1],["2024-08-05 13:10:12",1],["2024-08-05 13:10:13",1],["2024-08-05 13:10:15",1],["2024-08-05 13:10:23",1],["2024-08-05 13:10:27",2],["2024-08-05 13:10:33",1],["2024-08-05 13:10:34",1],["2024-08-05 13:10:41",1],["2024-08-05 13:10:42",1],["2024-08-05 13:10:44",1],["2024-08-05 13:10:47",1],["2024-08-05 13:10:49",1],["2024-08-05 13:10:51",1],["2024-08-05 13:11:01",1],["2024-08-05 13:11:04",1],["2024-08-05 13:11:05",1],["2024-08-05 13:11:07",1],["2024-08-05 13:11:09",1],["2024-08-05 13:11:19",1],["2024-08-05 13:11:20",1],["2024-08-05 13:11:23",1],["2024-08-05 13:11:28",1],["2024-08-05 13:11:32",1],["2024-08-05 13:11:35",1],["2024-08-05 13:11:42",2],["2024-08-05 13:11:44",1],["2024-08-05 13:11:49",1],["2024-08-05 13:11:53",1],["2024-08-05 13:11:54",1],["2024-08-05 13:12:02",1],["2024-08-05 13:12:07",1],["2024-08-05 13:12:08",1],["2024-08-05 13:12:13",1],["2024-08-05 13:12:16",1],["2024-08-05 13:12:19",1],["2024-08-05 13:12:23",1],["2024-08-05 13:12:27",1],["2024-08-05 13:12:29",1],["2024-08-05 13:12:33",1],["2024-08-05 13:12:36",1],["2024-08-05 13:12:38",1],["2024-08-05 13:12:42",1],["2024-08-05 13:12:44",1],["2024-08-05 13:12:45",1],["2024-08-05 13:12:52",1],["2024-08-05 13:12:53",1],["2024-08-05 13:12:58",1],["2024-08-05 13:13:02",2],["2024-08-05 13:13:04",1],["2024-08-05 13:13:12",1],["2024-08-05 13:13:13",1],["2024-08-05 13:13:16",1],["2024-08-05 13:13:19",1],["2024-08-05 13:13:24",1],["2024-08-05 13:13:31",1],["2024-08-05 13:13:32",2],["2024-08-05 13:13:44",1],["2024-08-05 13:13:46",2]],
+                            },
+                            {
+                                name: 'POST query advisory with /graphql',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:44",1],["2024-08-05 13:08:49",1],["2024-08-05 13:09:00",1],["2024-08-05 13:09:05",1],["2024-08-05 13:09:15",1],["2024-08-05 13:09:25",1],["2024-08-05 13:09:35",1],["2024-08-05 13:09:48",1],["2024-08-05 13:09:54",1],["2024-08-05 13:10:03",1],["2024-08-05 13:10:12",1],["2024-08-05 13:10:27",1],["2024-08-05 13:10:33",1],["2024-08-05 13:10:44",1],["2024-08-05 13:10:51",1],["2024-08-05 13:11:05",1],["2024-08-05 13:11:20",1],["2024-08-05 13:11:28",1],["2024-08-05 13:11:42",1],["2024-08-05 13:11:49",1],["2024-08-05 13:12:02",1],["2024-08-05 13:12:16",1],["2024-08-05 13:12:27",1],["2024-08-05 13:12:38",1],["2024-08-05 13:12:44",1],["2024-08-05 13:12:53",1],["2024-08-05 13:13:02",1],["2024-08-05 13:13:13",1],["2024-08-05 13:13:19",1],["2024-08-05 13:13:32",1],["2024-08-05 13:13:46",1]],
+                            },
+                        {
+                                name: 'GET /sboms',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:01",1],["2024-08-05 13:10:15",1],["2024-08-05 13:11:23",1],["2024-08-05 13:12:19",1],["2024-08-05 13:13:24",1]],
+                            },
+                        {
+                                name: 'GET /packages',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:15",1],["2024-08-05 13:10:27",1],["2024-08-05 13:11:35",1],["2024-08-05 13:12:33",1],["2024-08-05 13:13:32",1]],
+                            },
+                        {
+                                name: 'GET /openapi',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:54",1],["2024-08-05 13:10:10",1],["2024-08-05 13:11:09",1],["2024-08-05 13:12:13",1],["2024-08-05 13:13:12",1]],
+                            },
+                        {
+                                name: 'GET /index',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:46",1],["2024-08-05 13:09:59",1],["2024-08-05 13:11:04",1],["2024-08-05 13:12:07",1],["2024-08-05 13:13:02",1]],
+                            },
+                        {
+                                name: 'GET /advisories',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:30",1],["2024-08-05 13:10:42",1],["2024-08-05 13:11:42",1],["2024-08-05 13:12:42",1],["2024-08-05 13:13:46",1]],
+                            },
+                        {
+                                name: 'GET /importers',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:44",1],["2024-08-05 13:10:49",1],["2024-08-05 13:11:53",1],["2024-08-05 13:12:52",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/vulnerability',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:04",1],["2024-08-05 13:10:34",1],["2024-08-05 13:11:54",1],["2024-08-05 13:13:16",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/purl',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:31",1],["2024-08-05 13:10:47",1],["2024-08-05 13:12:23",1],["2024-08-05 13:13:44",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/organization',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:45",1],["2024-08-05 13:10:13",1],["2024-08-05 13:11:32",1],["2024-08-05 13:12:58",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/importer',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:18",1],["2024-08-05 13:10:41",1],["2024-08-05 13:12:08",1],["2024-08-05 13:13:31",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/advisory',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:50",1],["2024-08-05 13:10:23",1],["2024-08-05 13:11:44",1],["2024-08-05 13:13:04",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/sbom',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:10:06",1],["2024-08-05 13:11:19",1],["2024-08-05 13:12:45",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/purl?q=curl',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:42",1],["2024-08-05 13:11:01",1],["2024-08-05 13:12:29",1]],
+                            },
+                        {
+                                name: 'GET /api/v1/product',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:53",1],["2024-08-05 13:11:07",1],["2024-08-05 13:12:36",1]],
+                            },
+                        
+                        ]
+                    });
+                </script>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Name</th>
+                        <th># Requests</th>
+                        <th># Fails</th>
+                        <th>Average (ms)</th>
+                        <th>Min (ms)</th>
+                        <th>Max (ms)</th>
+                        <th>RPS</th>
+                        <th>Failures/s</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+        <td>GET</td>
+        <td>/advisories</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0.60</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.02</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/advisory</td>
+        <td>4</td>
+        <td>0</td>
+        <td>4.00</td>
+        <td>2</td>
+        <td>5</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/importer</td>
+        <td>4</td>
+        <td>0</td>
+        <td>1.00</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/organization</td>
+        <td>3</td>
+        <td>0</td>
+        <td>2.00</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/product</td>
+        <td>3</td>
+        <td>0</td>
+        <td>2.00</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/purl</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3.25</td>
+        <td>3</td>
+        <td>4</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/purl?q=curl</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3.33</td>
+        <td>3</td>
+        <td>4</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/sbom</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3.33</td>
+        <td>3</td>
+        <td>4</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/api/v1/vulnerability</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3.50</td>
+        <td>2</td>
+        <td>5</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/importers</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0.50</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/index</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0.75</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.01</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/openapi</td>
+        <td>5</td>
+        <td>0</td>
+        <td>1.00</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.02</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/packages</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0.80</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.02</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td>/sboms</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0.80</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.02</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td>POST</td>
+        <td>query advisory with /graphql</td>
+        <td>30</td>
+        <td>1</td>
+        <td>1.00</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0.10</td>
+        <td>0.00</td>
+    </tr>
+<tr>
+        <td></td>
+        <td>Aggregated</td>
+        <td>86</td>
+        <td>1</td>
+        <td>1.51</td>
+        <td>1</td>
+        <td>5</td>
+        <td>0.29</td>
+        <td>0.00</td>
+    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+        <div class="responses">
+            <h2>Response Time Metrics</h2>
+
+            <div class="graph">
+                <div id="graph-avg-response-time" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-avg-response-time');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Response time [ms]',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        legend: {
+                            type: 'scroll',
+                            width: '75%',
+                            data: ["Total","GET /api/v1/advisory","GET /api/v1/vulnerability","GET /api/v1/sbom","GET /api/v1/purl?q=curl","GET /api/v1/purl","GET /api/v1/organization","GET /api/v1/product","POST query advisory with /graphql","GET /openapi","GET /api/v1/importer","GET /sboms","GET /packages","GET /index","GET /advisories","GET /importers"],
+                        },
+                        series: [
+                            {
+                                name: 'Total',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:08:44",2.0],["2024-08-05 13:08:45",3.0],["2024-08-05 13:08:46",1.0],["2024-08-05 13:08:49",1.0],["2024-08-05 13:08:50",5.0],["2024-08-05 13:08:54",1.0],["2024-08-05 13:09:00",1.0],["2024-08-05 13:09:01",1.0],["2024-08-05 13:09:04",5.0],["2024-08-05 13:09:05",1.0],["2024-08-05 13:09:15",1.0],["2024-08-05 13:09:18",1.0],["2024-08-05 13:09:25",1.0],["2024-08-05 13:09:30",1.0],["2024-08-05 13:09:31",4.0],["2024-08-05 13:09:35",1.0],["2024-08-05 13:09:42",3.0],["2024-08-05 13:09:48",1.0],["2024-08-05 13:09:53",2.0],["2024-08-05 13:09:54",1.0],["2024-08-05 13:09:59",1.0],["2024-08-05 13:10:03",1.0],["2024-08-05 13:10:06",4.0],["2024-08-05 13:10:10",1.0],["2024-08-05 13:10:12",1.0],["2024-08-05 13:10:13",2.0],["2024-08-05 13:10:15",1.0],["2024-08-05 13:10:23",2.0],["2024-08-05 13:10:27",1.0],["2024-08-05 13:10:33",1.0],["2024-08-05 13:10:34",4.0],["2024-08-05 13:10:41",1.0],["2024-08-05 13:10:44",1.0],["2024-08-05 13:10:47",3.0],["2024-08-05 13:10:51",1.0],["2024-08-05 13:11:01",4.0],["2024-08-05 13:11:04",1.0],["2024-08-05 13:11:05",1.0],["2024-08-05 13:11:07",2.0],["2024-08-05 13:11:09",1.0],["2024-08-05 13:11:19",3.0],["2024-08-05 13:11:20",1.0],["2024-08-05 13:11:23",1.0],["2024-08-05 13:11:28",1.0],["2024-08-05 13:11:32",2.0],["2024-08-05 13:11:35",1.0],["2024-08-05 13:11:42",1.0],["2024-08-05 13:11:44",4.0],["2024-08-05 13:11:49",1.0],["2024-08-05 13:11:53",1.0],["2024-08-05 13:11:54",2.0],["2024-08-05 13:12:02",1.0],["2024-08-05 13:12:07",1.0],["2024-08-05 13:12:08",1.0],["2024-08-05 13:12:13",1.0],["2024-08-05 13:12:16",1.0],["2024-08-05 13:12:19",1.0],["2024-08-05 13:12:23",3.0],["2024-08-05 13:12:27",1.0],["2024-08-05 13:12:29",3.0],["2024-08-05 13:12:33",1.0],["2024-08-05 13:12:36",2.0],["2024-08-05 13:12:38",1.0],["2024-08-05 13:12:42",1.0],["2024-08-05 13:12:44",1.0],["2024-08-05 13:12:45",3.0],["2024-08-05 13:12:52",1.0],["2024-08-05 13:12:53",1.0],["2024-08-05 13:12:58",2.0],["2024-08-05 13:13:02",0.5],["2024-08-05 13:13:04",5.0],["2024-08-05 13:13:12",1.0],["2024-08-05 13:13:13",1.0],["2024-08-05 13:13:16",3.0],["2024-08-05 13:13:19",1.0],["2024-08-05 13:13:31",1.0],["2024-08-05 13:13:32",0.5],["2024-08-05 13:13:44",3.0],["2024-08-05 13:13:46",0.5]],
+                            },
+                            {
+                                name: 'GET /api/v1/advisory',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:50",5.0],["2024-08-05 13:10:23",2.0],["2024-08-05 13:11:44",4.0],["2024-08-05 13:13:04",5.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/vulnerability',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:04",5.0],["2024-08-05 13:10:34",4.0],["2024-08-05 13:11:54",2.0],["2024-08-05 13:13:16",3.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/sbom',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:10:06",4.0],["2024-08-05 13:11:19",3.0],["2024-08-05 13:12:45",3.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/purl?q=curl',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:42",3.0],["2024-08-05 13:11:01",4.0],["2024-08-05 13:12:29",3.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/purl',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:31",4.0],["2024-08-05 13:10:47",3.0],["2024-08-05 13:12:23",3.0],["2024-08-05 13:13:44",3.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/organization',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:45",3.0],["2024-08-05 13:10:13",2.0],["2024-08-05 13:11:32",2.0],["2024-08-05 13:12:58",2.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/product',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:53",2.0],["2024-08-05 13:11:07",2.0],["2024-08-05 13:12:36",2.0]],
+                            },
+                        {
+                                name: 'POST query advisory with /graphql',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:44",2.0],["2024-08-05 13:08:49",1.0],["2024-08-05 13:09:00",1.0],["2024-08-05 13:09:05",1.0],["2024-08-05 13:09:15",1.0],["2024-08-05 13:09:25",1.0],["2024-08-05 13:09:35",1.0],["2024-08-05 13:09:48",1.0],["2024-08-05 13:09:54",1.0],["2024-08-05 13:10:03",1.0],["2024-08-05 13:10:12",1.0],["2024-08-05 13:10:27",1.0],["2024-08-05 13:10:33",1.0],["2024-08-05 13:10:44",1.0],["2024-08-05 13:10:51",1.0],["2024-08-05 13:11:05",1.0],["2024-08-05 13:11:20",1.0],["2024-08-05 13:11:28",1.0],["2024-08-05 13:11:42",1.0],["2024-08-05 13:11:49",1.0],["2024-08-05 13:12:02",1.0],["2024-08-05 13:12:16",1.0],["2024-08-05 13:12:27",1.0],["2024-08-05 13:12:38",1.0],["2024-08-05 13:12:44",1.0],["2024-08-05 13:12:53",1.0],["2024-08-05 13:13:02",1.0],["2024-08-05 13:13:13",1.0],["2024-08-05 13:13:19",1.0],["2024-08-05 13:13:32",1.0],["2024-08-05 13:13:46",1.0]],
+                            },
+                        {
+                                name: 'GET /openapi',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:54",1.0],["2024-08-05 13:10:10",1.0],["2024-08-05 13:11:09",1.0],["2024-08-05 13:12:13",1.0],["2024-08-05 13:13:12",1.0]],
+                            },
+                        {
+                                name: 'GET /api/v1/importer',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:18",1.0],["2024-08-05 13:10:41",1.0],["2024-08-05 13:12:08",1.0],["2024-08-05 13:13:31",1.0]],
+                            },
+                        {
+                                name: 'GET /sboms',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:01",1.0],["2024-08-05 13:10:15",1.0],["2024-08-05 13:11:23",1.0],["2024-08-05 13:12:19",1.0]],
+                            },
+                        {
+                                name: 'GET /packages',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:15",1.0],["2024-08-05 13:10:27",1.0],["2024-08-05 13:11:35",1.0],["2024-08-05 13:12:33",1.0]],
+                            },
+                        {
+                                name: 'GET /index',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:08:46",1.0],["2024-08-05 13:09:59",1.0],["2024-08-05 13:11:04",1.0],["2024-08-05 13:12:07",1.0]],
+                            },
+                        {
+                                name: 'GET /advisories',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:09:30",1.0],["2024-08-05 13:11:42",1.0],["2024-08-05 13:12:42",1.0]],
+                            },
+                        {
+                                name: 'GET /importers',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                data: [["2024-08-05 13:11:53",1.0],["2024-08-05 13:12:52",1.0]],
+                            },
+                        
+                        ]
+                    });
+                </script>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Name</th>
+                        <th>50%ile (ms)</th>
+                        <th>60%ile (ms)</th>
+                        <th>70%ile (ms)</th>
+                        <th>80%ile (ms)</th>
+                        <th>90%ile (ms)</th>
+                        <th>95%ile (ms)</th>
+                        <th>99%ile (ms)</th>
+                        <th>100%ile (ms)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+            <td>GET</td>
+            <td>/advisories</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/advisory</td>
+            <td>4</td>
+            <td>4</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/importer</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/organization</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/product</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/purl</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/purl?q=curl</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/sbom</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/api/v1/vulnerability</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+            <td>4</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/importers</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/index</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/openapi</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/packages</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>GET</td>
+            <td>/sboms</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td>POST</td>
+            <td>query advisory with /graphql</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+<tr>
+            <td></td>
+            <td>Aggregated</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+        <div class="status_codes">
+        <h2>Status Code Metrics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th colspan="2">Name</th>
+                    <th colspan="3">Status Codes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+        <td>GET</td>
+        <td colspan="2">/advisories</td>
+        <td colspan="3">5 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/advisory</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/importer</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/organization</td>
+        <td colspan="3">3 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/product</td>
+        <td colspan="3">3 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/purl</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/purl?q=curl</td>
+        <td colspan="3">3 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/sbom</td>
+        <td colspan="3">3 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/api/v1/vulnerability</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/importers</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/index</td>
+        <td colspan="3">4 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/openapi</td>
+        <td colspan="3">5 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/packages</td>
+        <td colspan="3">5 [200]</td>
+    </tr>
+<tr>
+        <td>GET</td>
+        <td colspan="2">/sboms</td>
+        <td colspan="3">5 [200]</td>
+    </tr>
+<tr>
+        <td>POST</td>
+        <td colspan="2">query advisory with /graphql</td>
+        <td colspan="3">29 [200], 1 [401]</td>
+    </tr>
+<tr>
+        <td></td>
+        <td colspan="2">Aggregated</td>
+        <td colspan="3">85 [200], 1 [401]</td>
+    </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="transactions">
+        <h2>Transaction Metrics</h2>
+
+        <div class="graph">
+                <div id="graph-tps" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-tps');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Transactions #',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        
+                        series: [
+                            {
+                                name: 'Total',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:08:44",2],["2024-08-05 13:08:45",2],["2024-08-05 13:08:46",2],["2024-08-05 13:08:49",1],["2024-08-05 13:08:50",1],["2024-08-05 13:08:54",1],["2024-08-05 13:09:00",1],["2024-08-05 13:09:01",1],["2024-08-05 13:09:04",1],["2024-08-05 13:09:05",1],["2024-08-05 13:09:15",2],["2024-08-05 13:09:18",1],["2024-08-05 13:09:25",1],["2024-08-05 13:09:30",1],["2024-08-05 13:09:31",1],["2024-08-05 13:09:35",1],["2024-08-05 13:09:42",1],["2024-08-05 13:09:44",1],["2024-08-05 13:09:48",1],["2024-08-05 13:09:53",1],["2024-08-05 13:09:54",1],["2024-08-05 13:09:59",1],["2024-08-05 13:10:03",1],["2024-08-05 13:10:06",1],["2024-08-05 13:10:10",1],["2024-08-05 13:10:12",1],["2024-08-05 13:10:13",1],["2024-08-05 13:10:15",1],["2024-08-05 13:10:23",1],["2024-08-05 13:10:27",2],["2024-08-05 13:10:33",1],["2024-08-05 13:10:34",1],["2024-08-05 13:10:41",1],["2024-08-05 13:10:42",1],["2024-08-05 13:10:44",1],["2024-08-05 13:10:47",1],["2024-08-05 13:10:49",1],["2024-08-05 13:10:51",1],["2024-08-05 13:11:01",1],["2024-08-05 13:11:04",1],["2024-08-05 13:11:05",1],["2024-08-05 13:11:07",1],["2024-08-05 13:11:09",1],["2024-08-05 13:11:19",1],["2024-08-05 13:11:20",1],["2024-08-05 13:11:23",1],["2024-08-05 13:11:28",1],["2024-08-05 13:11:32",1],["2024-08-05 13:11:35",1],["2024-08-05 13:11:42",2],["2024-08-05 13:11:44",1],["2024-08-05 13:11:49",1],["2024-08-05 13:11:53",1],["2024-08-05 13:11:54",1],["2024-08-05 13:12:02",1],["2024-08-05 13:12:07",1],["2024-08-05 13:12:08",1],["2024-08-05 13:12:13",1],["2024-08-05 13:12:16",1],["2024-08-05 13:12:19",1],["2024-08-05 13:12:23",1],["2024-08-05 13:12:27",1],["2024-08-05 13:12:29",1],["2024-08-05 13:12:33",1],["2024-08-05 13:12:36",1],["2024-08-05 13:12:38",1],["2024-08-05 13:12:42",1],["2024-08-05 13:12:44",1],["2024-08-05 13:12:45",1],["2024-08-05 13:12:52",1],["2024-08-05 13:12:53",1],["2024-08-05 13:12:58",1],["2024-08-05 13:13:02",2],["2024-08-05 13:13:04",1],["2024-08-05 13:13:12",1],["2024-08-05 13:13:13",1],["2024-08-05 13:13:16",1],["2024-08-05 13:13:19",1],["2024-08-05 13:13:24",1],["2024-08-05 13:13:31",1],["2024-08-05 13:13:32",2],["2024-08-05 13:13:44",1],["2024-08-05 13:13:46",2]],
+                            },
+                            
+                        ]
+                    });
+                </script>
+            </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Transaction</th>
+                    <th># Times Run</th>
+                    <th># Fails</th>
+                    <th>Average (ms)</th>
+                    <th>Min (ms)</th>
+                    <th>Max (ms)</th>
+                    <th>RPS</th>
+                    <th>Failures/s</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td colspan="10" align="left"><strong>WebsiteUser</strong></td>
+        </tr>
+<tr>
+            <td colspan="2">0.0 logon</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.1 /index</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.2 /openapi</strong></td>
+            <td>5</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.02</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.3 /sboms</strong></td>
+            <td>5</td>
+            <td>0</td>
+            <td>0.80</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.02</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.4 /packages</strong></td>
+            <td>5</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.02</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.5 /advisories</strong></td>
+            <td>5</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.02</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">0.6 /importers</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>0.75</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="10" align="left"><strong>RestAPIUser</strong></td>
+        </tr>
+<tr>
+            <td colspan="2">1.0 logon</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.1 /api/v1/organization</strong></td>
+            <td>3</td>
+            <td>0</td>
+            <td>2.00</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.2 /api/v1/advisory</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>4.00</td>
+            <td>2</td>
+            <td>5</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.3 /api/v1/vulnerability</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>3.75</td>
+            <td>2</td>
+            <td>6</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.4 /api/v1/importer</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.5 /api/v1/purl</strong></td>
+            <td>4</td>
+            <td>0</td>
+            <td>3.25</td>
+            <td>3</td>
+            <td>4</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.6 /api/v1/purl?q=curl</strong></td>
+            <td>3</td>
+            <td>0</td>
+            <td>3.33</td>
+            <td>3</td>
+            <td>4</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.7 /api/v1/product</strong></td>
+            <td>3</td>
+            <td>0</td>
+            <td>2.00</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">1.8 /api/v1/sbom</strong></td>
+            <td>3</td>
+            <td>0</td>
+            <td>3.33</td>
+            <td>3</td>
+            <td>4</td>
+            <td>0.01</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="10" align="left"><strong>GraphQLUser</strong></td>
+        </tr>
+<tr>
+            <td colspan="2">2.0 logon</strong></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2">2.1 query advisory with /graphql</strong></td>
+            <td>30</td>
+            <td>0</td>
+            <td>1.00</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0.10</td>
+            <td>0.00</td>
+        </tr>
+<tr>
+            <td colspan="2"> Aggregated</strong></td>
+            <td>86</td>
+            <td>0</td>
+            <td>1.51</td>
+            <td>1</td>
+            <td>6</td>
+            <td>0.29</td>
+            <td>0.00</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="scenarios">
+        <h2>Scenario Metrics</h2>
+
+        <div class="graph">
+                <div id="graph-sps" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-sps');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Scenarios #',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        
+                        series: [
+                            {
+                                name: 'Total',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:08:49",1],["2024-08-05 13:09:00",1],["2024-08-05 13:09:05",1],["2024-08-05 13:09:15",1],["2024-08-05 13:09:25",1],["2024-08-05 13:09:35",1],["2024-08-05 13:09:48",1],["2024-08-05 13:09:54",1],["2024-08-05 13:09:59",1],["2024-08-05 13:10:03",1],["2024-08-05 13:10:12",1],["2024-08-05 13:10:13",1],["2024-08-05 13:10:27",1],["2024-08-05 13:10:33",1],["2024-08-05 13:10:44",1],["2024-08-05 13:10:51",1],["2024-08-05 13:11:04",1],["2024-08-05 13:11:05",1],["2024-08-05 13:11:20",1],["2024-08-05 13:11:28",1],["2024-08-05 13:11:32",1],["2024-08-05 13:11:42",1],["2024-08-05 13:11:49",1],["2024-08-05 13:12:02",1],["2024-08-05 13:12:07",1],["2024-08-05 13:12:16",1],["2024-08-05 13:12:27",1],["2024-08-05 13:12:38",1],["2024-08-05 13:12:44",1],["2024-08-05 13:12:53",1],["2024-08-05 13:12:58",1],["2024-08-05 13:13:02",2],["2024-08-05 13:13:13",1],["2024-08-05 13:13:19",1],["2024-08-05 13:13:32",1],["2024-08-05 13:13:46",1]],
+                            },
+                            
+                        ]
+                    });
+                </script>
+            </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Scenario</th>
+                    <th># Users</th>
+                    <th># Times Run</th>
+                    <th>Average (ms)</th>
+                    <th>Min (ms)</th>
+                    <th>Max (ms)</th>
+                    <th>Scenarios/s</th>
+                    <th>Iterations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td colspan="2">WebsiteUser</strong></td>
+            <td>1</td>
+            <td>4</td>
+            <td>64127.25</td>
+            <td>55444</td>
+            <td>72943</td>
+            <td>0.01</td>
+            <td>4.00</td>
+        </tr>
+<tr>
+            <td colspan="2">RestAPIUser</strong></td>
+            <td>1</td>
+            <td>3</td>
+            <td>84524.34</td>
+            <td>78850</td>
+            <td>88561</td>
+            <td>0.01</td>
+            <td>3.00</td>
+        </tr>
+<tr>
+            <td colspan="2">GraphQLUser</strong></td>
+            <td>1</td>
+            <td>30</td>
+            <td>10082.30</td>
+            <td>5028</td>
+            <td>14634</td>
+            <td>0.10</td>
+            <td>30.00</td>
+        </tr>
+<tr>
+            <td colspan="2">Aggregated</strong></td>
+            <td>3</td>
+            <td>37</td>
+            <td>21960.84</td>
+            <td>5028</td>
+            <td>88561</td>
+            <td>0.12</td>
+            <td>37.00</td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="users">
+        <h2>User Metrics</h2>
+            <div class="graph">
+                <div id="graph-active-users" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-active-users');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Active users #',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        
+                        series: [
+                            {
+                                name: 'Total',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:08:44",3],["2024-08-05 13:08:45",3],["2024-08-05 13:08:46",3],["2024-08-05 13:08:47",3],["2024-08-05 13:08:48",3],["2024-08-05 13:08:49",3],["2024-08-05 13:08:50",3],["2024-08-05 13:08:51",3],["2024-08-05 13:08:52",3],["2024-08-05 13:08:53",3],["2024-08-05 13:08:54",3],["2024-08-05 13:08:55",3],["2024-08-05 13:08:56",3],["2024-08-05 13:08:57",3],["2024-08-05 13:08:58",3],["2024-08-05 13:08:59",3],["2024-08-05 13:09:00",3],["2024-08-05 13:09:01",3],["2024-08-05 13:09:02",3],["2024-08-05 13:09:03",3],["2024-08-05 13:09:04",3],["2024-08-05 13:09:05",3],["2024-08-05 13:09:06",3],["2024-08-05 13:09:07",3],["2024-08-05 13:09:08",3],["2024-08-05 13:09:09",3],["2024-08-05 13:09:10",3],["2024-08-05 13:09:11",3],["2024-08-05 13:09:12",3],["2024-08-05 13:09:13",3],["2024-08-05 13:09:14",3],["2024-08-05 13:09:15",3],["2024-08-05 13:09:16",3],["2024-08-05 13:09:17",3],["2024-08-05 13:09:18",3],["2024-08-05 13:09:19",3],["2024-08-05 13:09:20",3],["2024-08-05 13:09:21",3],["2024-08-05 13:09:22",3],["2024-08-05 13:09:23",3],["2024-08-05 13:09:24",3],["2024-08-05 13:09:25",3],["2024-08-05 13:09:26",3],["2024-08-05 13:09:27",3],["2024-08-05 13:09:28",3],["2024-08-05 13:09:29",3],["2024-08-05 13:09:30",3],["2024-08-05 13:09:31",3],["2024-08-05 13:09:32",3],["2024-08-05 13:09:33",3],["2024-08-05 13:09:34",3],["2024-08-05 13:09:35",3],["2024-08-05 13:09:36",3],["2024-08-05 13:09:37",3],["2024-08-05 13:09:38",3],["2024-08-05 13:09:39",3],["2024-08-05 13:09:40",3],["2024-08-05 13:09:41",3],["2024-08-05 13:09:42",3],["2024-08-05 13:09:43",3],["2024-08-05 13:09:44",3],["2024-08-05 13:09:45",3],["2024-08-05 13:09:46",3],["2024-08-05 13:09:47",3],["2024-08-05 13:09:48",3],["2024-08-05 13:09:49",3],["2024-08-05 13:09:50",3],["2024-08-05 13:09:51",3],["2024-08-05 13:09:52",3],["2024-08-05 13:09:53",3],["2024-08-05 13:09:54",3],["2024-08-05 13:09:55",3],["2024-08-05 13:09:56",3],["2024-08-05 13:09:57",3],["2024-08-05 13:09:58",3],["2024-08-05 13:09:59",3],["2024-08-05 13:10:00",3],["2024-08-05 13:10:01",3],["2024-08-05 13:10:02",3],["2024-08-05 13:10:03",3],["2024-08-05 13:10:04",3],["2024-08-05 13:10:05",3],["2024-08-05 13:10:06",3],["2024-08-05 13:10:07",3],["2024-08-05 13:10:08",3],["2024-08-05 13:10:09",3],["2024-08-05 13:10:10",3],["2024-08-05 13:10:11",3],["2024-08-05 13:10:12",3],["2024-08-05 13:10:13",3],["2024-08-05 13:10:14",3],["2024-08-05 13:10:15",3],["2024-08-05 13:10:16",3],["2024-08-05 13:10:17",3],["2024-08-05 13:10:18",3],["2024-08-05 13:10:19",3],["2024-08-05 13:10:20",3],["2024-08-05 13:10:21",3],["2024-08-05 13:10:22",3],["2024-08-05 13:10:23",3],["2024-08-05 13:10:24",3],["2024-08-05 13:10:25",3],["2024-08-05 13:10:26",3],["2024-08-05 13:10:27",3],["2024-08-05 13:10:28",3],["2024-08-05 13:10:29",3],["2024-08-05 13:10:30",3],["2024-08-05 13:10:31",3],["2024-08-05 13:10:32",3],["2024-08-05 13:10:33",3],["2024-08-05 13:10:34",3],["2024-08-05 13:10:35",3],["2024-08-05 13:10:36",3],["2024-08-05 13:10:37",3],["2024-08-05 13:10:38",3],["2024-08-05 13:10:39",3],["2024-08-05 13:10:40",3],["2024-08-05 13:10:41",3],["2024-08-05 13:10:42",3],["2024-08-05 13:10:43",3],["2024-08-05 13:10:44",3],["2024-08-05 13:10:45",3],["2024-08-05 13:10:46",3],["2024-08-05 13:10:47",3],["2024-08-05 13:10:48",3],["2024-08-05 13:10:49",3],["2024-08-05 13:10:50",3],["2024-08-05 13:10:51",3],["2024-08-05 13:10:52",3],["2024-08-05 13:10:53",3],["2024-08-05 13:10:54",3],["2024-08-05 13:10:55",3],["2024-08-05 13:10:56",3],["2024-08-05 13:10:57",3],["2024-08-05 13:10:58",3],["2024-08-05 13:10:59",3],["2024-08-05 13:11:00",3],["2024-08-05 13:11:01",3],["2024-08-05 13:11:02",3],["2024-08-05 13:11:03",3],["2024-08-05 13:11:04",3],["2024-08-05 13:11:05",3],["2024-08-05 13:11:06",3],["2024-08-05 13:11:07",3],["2024-08-05 13:11:08",3],["2024-08-05 13:11:09",3],["2024-08-05 13:11:10",3],["2024-08-05 13:11:11",3],["2024-08-05 13:11:12",3],["2024-08-05 13:11:13",3],["2024-08-05 13:11:14",3],["2024-08-05 13:11:15",3],["2024-08-05 13:11:16",3],["2024-08-05 13:11:17",3],["2024-08-05 13:11:18",3],["2024-08-05 13:11:19",3],["2024-08-05 13:11:20",3],["2024-08-05 13:11:21",3],["2024-08-05 13:11:22",3],["2024-08-05 13:11:23",3],["2024-08-05 13:11:24",3],["2024-08-05 13:11:25",3],["2024-08-05 13:11:26",3],["2024-08-05 13:11:27",3],["2024-08-05 13:11:28",3],["2024-08-05 13:11:29",3],["2024-08-05 13:11:30",3],["2024-08-05 13:11:31",3],["2024-08-05 13:11:32",3],["2024-08-05 13:11:33",3],["2024-08-05 13:11:34",3],["2024-08-05 13:11:35",3],["2024-08-05 13:11:36",3],["2024-08-05 13:11:37",3],["2024-08-05 13:11:38",3],["2024-08-05 13:11:39",3],["2024-08-05 13:11:40",3],["2024-08-05 13:11:41",3],["2024-08-05 13:11:42",3],["2024-08-05 13:11:43",3],["2024-08-05 13:11:44",3],["2024-08-05 13:11:45",3],["2024-08-05 13:11:46",3],["2024-08-05 13:11:47",3],["2024-08-05 13:11:48",3],["2024-08-05 13:11:49",3],["2024-08-05 13:11:50",3],["2024-08-05 13:11:51",3],["2024-08-05 13:11:52",3],["2024-08-05 13:11:53",3],["2024-08-05 13:11:54",3],["2024-08-05 13:11:55",3],["2024-08-05 13:11:56",3],["2024-08-05 13:11:57",3],["2024-08-05 13:11:58",3],["2024-08-05 13:11:59",3],["2024-08-05 13:12:00",3],["2024-08-05 13:12:01",3],["2024-08-05 13:12:02",3],["2024-08-05 13:12:03",3],["2024-08-05 13:12:04",3],["2024-08-05 13:12:05",3],["2024-08-05 13:12:06",3],["2024-08-05 13:12:07",3],["2024-08-05 13:12:08",3],["2024-08-05 13:12:09",3],["2024-08-05 13:12:10",3],["2024-08-05 13:12:11",3],["2024-08-05 13:12:12",3],["2024-08-05 13:12:13",3],["2024-08-05 13:12:14",3],["2024-08-05 13:12:15",3],["2024-08-05 13:12:16",3],["2024-08-05 13:12:17",3],["2024-08-05 13:12:18",3],["2024-08-05 13:12:19",3],["2024-08-05 13:12:20",3],["2024-08-05 13:12:21",3],["2024-08-05 13:12:22",3],["2024-08-05 13:12:23",3],["2024-08-05 13:12:24",3],["2024-08-05 13:12:25",3],["2024-08-05 13:12:26",3],["2024-08-05 13:12:27",3],["2024-08-05 13:12:28",3],["2024-08-05 13:12:29",3],["2024-08-05 13:12:30",3],["2024-08-05 13:12:31",3],["2024-08-05 13:12:32",3],["2024-08-05 13:12:33",3],["2024-08-05 13:12:34",3],["2024-08-05 13:12:35",3],["2024-08-05 13:12:36",3],["2024-08-05 13:12:37",3],["2024-08-05 13:12:38",3],["2024-08-05 13:12:39",3],["2024-08-05 13:12:40",3],["2024-08-05 13:12:41",3],["2024-08-05 13:12:42",3],["2024-08-05 13:12:43",3],["2024-08-05 13:12:44",3],["2024-08-05 13:12:45",3],["2024-08-05 13:12:46",3],["2024-08-05 13:12:47",3],["2024-08-05 13:12:48",3],["2024-08-05 13:12:49",3],["2024-08-05 13:12:50",3],["2024-08-05 13:12:51",3],["2024-08-05 13:12:52",3],["2024-08-05 13:12:53",3],["2024-08-05 13:12:54",3],["2024-08-05 13:12:55",3],["2024-08-05 13:12:56",3],["2024-08-05 13:12:57",3],["2024-08-05 13:12:58",3],["2024-08-05 13:12:59",3],["2024-08-05 13:13:00",3],["2024-08-05 13:13:01",3],["2024-08-05 13:13:02",3],["2024-08-05 13:13:03",3],["2024-08-05 13:13:04",3],["2024-08-05 13:13:05",3],["2024-08-05 13:13:06",3],["2024-08-05 13:13:07",3],["2024-08-05 13:13:08",3],["2024-08-05 13:13:09",3],["2024-08-05 13:13:10",3],["2024-08-05 13:13:11",3],["2024-08-05 13:13:12",3],["2024-08-05 13:13:13",3],["2024-08-05 13:13:14",3],["2024-08-05 13:13:15",3],["2024-08-05 13:13:16",3],["2024-08-05 13:13:17",3],["2024-08-05 13:13:18",3],["2024-08-05 13:13:19",3],["2024-08-05 13:13:20",3],["2024-08-05 13:13:21",3],["2024-08-05 13:13:22",3],["2024-08-05 13:13:23",3],["2024-08-05 13:13:24",3],["2024-08-05 13:13:25",3],["2024-08-05 13:13:26",3],["2024-08-05 13:13:27",3],["2024-08-05 13:13:28",3],["2024-08-05 13:13:29",3],["2024-08-05 13:13:30",3],["2024-08-05 13:13:31",3],["2024-08-05 13:13:32",3],["2024-08-05 13:13:33",3],["2024-08-05 13:13:34",3],["2024-08-05 13:13:35",3],["2024-08-05 13:13:36",3],["2024-08-05 13:13:37",3],["2024-08-05 13:13:38",3],["2024-08-05 13:13:39",3],["2024-08-05 13:13:40",3],["2024-08-05 13:13:41",3],["2024-08-05 13:13:42",3],["2024-08-05 13:13:43",3]],
+                            },
+                            
+                        ]
+                    });
+                </script>
+            </div>
+        </div>
+
+        <div class="errors">
+        <h2>Errors</h2>
+
+        <div class="graph">
+                <div id="graph-eps" style="width: 1000px; height:500px; background: white;"></div>
+
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('graph-eps');
+                    var myChart = echarts.init(chartDom);
+
+                    myChart.setOption({
+                        color: ['#2c664f', '#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+                        tooltip: { trigger: 'axis' },
+                        toolbox: {
+                            feature: {
+                                dataZoom: { yAxisIndex: 'none' },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        dataZoom: [
+                            {
+                                type: 'inside',
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                            {
+                                start: 0,
+                                end: 100,
+                                fillerColor: 'rgba(34, 80, 61, 0.25)',
+                                selectedDataBackground: {
+                                    lineStyle: { color: '#2c664f' },
+                                    areaStyle: { color: '#378063' }
+                                }
+                            },
+                        ],
+                        xAxis: { type: 'time' },
+                        yAxis: {
+                            name: 'Errors #',
+                            nameLocation: 'center',
+                            nameRotate: 90,
+                            nameGap: 45,
+                            type: 'value'
+                        },
+                        
+                        series: [
+                            {
+                                name: 'POST query advisory with /graphql',
+                                type: 'line',
+                                symbol: 'none',
+                                sampling: 'lttb',
+                                lineStyle: { color: '#2c664f' },
+                                areaStyle: { color: '#378063' },
+                                markArea: {
+                                    data: [
+                                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:44'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:44',
+                                itemStyle: { color: 'rgba(44, 102, 79, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:08:47',
+                                itemStyle: { borderColor: 'rgba(44, 102, 79, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:08:47'
+                            }
+                        ],[
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { color: 'rgba(179, 65, 65, 0.05)' },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                        [
+                            {
+                                xAxis: '2024-08-05 13:13:47',
+                                itemStyle: { borderColor: 'rgba(179, 65, 65, 0.25)', borderWidth: 1 },
+                            },
+                            {
+                                xAxis: '2024-08-05 13:13:47'
+                            }
+                        ],
+                                    ]
+                                },
+                                data: [["2024-08-05 13:13:46",1]],
+                            },
+                            
+                        ]
+                    });
+                </script>
+            </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th colspan="3">Error</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+        <td>1</td>
+        <td colspan="4">401 Unauthorized: query advisory with /graphql</strong></td>
+    </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+</body>
+</html>
