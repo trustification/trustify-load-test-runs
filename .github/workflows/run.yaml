@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: write  # to be able to push changes
@@ -90,7 +90,7 @@ jobs:
           
           pushd repo/publish/reports
           
-          tree -H 'reports' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' -P "*.html" -D -o ../index.html
+          tree -H 'reports' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' -P "*.html" -D -o ../index.html --houtro ""
           
           popd
           
