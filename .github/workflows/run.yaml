@@ -77,7 +77,7 @@ jobs:
           
           cd repo
           
-          tree -H '.' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' --houtro "" -P "*.html" -D -o index.html
+          tree -H '.' --charset utf-8 -I index.html -L 1 --timefmt '%d-%b-%Y %H:%M' -P "*.html" -D -o index.html
           
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
