@@ -30,6 +30,10 @@ jobs:
         run: |
           docker compose -f compose.yaml run loadtests
 
+      - if: always()
+        run: |
+          docker compose -f compose.yaml logs > containers.log
+
       - name: Cleanup
         if: ${{ always() }}
         run: |
@@ -50,10 +54,6 @@ jobs:
           echo "## Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Load test failed. No report generated" >> $GITHUB_STEP_SUMMARY
-
-      - if: always()
-        run: |
-          docker compose -f compose.yaml logs > containers.log
 
       - name: Upload container logs
         uses: actions/upload-artifact@v4
