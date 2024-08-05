@@ -87,10 +87,10 @@ services:
       dockerfile: ./Containerfile.trustify
     environment:
       RUST_LOG: debug
-      DB_USER: postgres
-      DB_PASSWORD: eggs
-      DB_HOST: postgres
-      DB_NAME: trustify
+      TRUSTD_DB_USER: postgres
+      TRUSTD_DB_PASSWORD: eggs
+      TRUSTD_DB_HOST: postgres
+      TRUSTD_DB_NAME: trustify
     command:
       - db
       - migrate
@@ -104,10 +104,10 @@ services:
     build:
       dockerfile: ./Containerfile.trustify
     environment:
-      DB_USER: postgres
-      DB_PASSWORD: eggs
-      DB_HOST: postgres
-      DB_NAME: trustify
+      TRUSTD_DB_USER: postgres
+      TRUSTD_DB_PASSWORD: eggs
+      TRUSTD_DB_HOST: postgres
+      TRUSTD_DB_NAME: trustify
       RUST_LOG: info
       INFRASTRUCTURE_ENABLED: "true"
       HTTP_SERVER_BIND_ADDR: "::"
