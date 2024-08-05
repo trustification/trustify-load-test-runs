@@ -21,20 +21,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: run
 
       - name: Build Containers
+        working-directory: run
         run: |
           docker compose -f compose.yaml build
 
       - name: Run
+        working-directory: run
         run: |
           docker compose -f compose.yaml run loadtests
 
       - if: always()
+        working-directory: run
         run: |
           docker compose -f compose.yaml logs > containers.log
 
       - name: Cleanup
+        working-directory: run
         if: ${{ always() }}
         run: |
           docker compose -f compose.yaml down
@@ -45,11 +51,12 @@ jobs:
         with:
           name: report
           path: |
-            report/report.html
-            report/report.json
+            run/report/report.html
+            run/report/report.json
           if-no-files-found: error
 
       - if: failure()
+        working-directory: run
         run: |
           echo "## Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -61,7 +68,7 @@ jobs:
         with:
           name: logs
           path: |
-            containers.log
+            run/containers.log
           if-no-files-found: error
 
       - name: Record test results
