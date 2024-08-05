@@ -27,6 +27,7 @@ services:
           memory: 2G
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "trustify" ]
+      start_period: 10s
       interval: 2s
       timeout: 5s
       retries: 20
