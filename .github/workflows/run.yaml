@@ -51,6 +51,19 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Load test failed. No report generated" >> $GITHUB_STEP_SUMMARY
 
+      - if: always()
+        run: |
+          docker compose -f compose.yaml logs > containers.log
+
+      - name: Upload container logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: logs
+          path: |
+            containers.log
+          if-no-files-found: error
+
       - name: Record test results
         env:
           SOURCE: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
