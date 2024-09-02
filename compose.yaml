@@ -174,8 +174,8 @@ services:
       ISSUER_URL: http://keycloak:8080/realms/trustify
       CLIENT_ID: walker
       CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP # notsecret
-      WAIT_TIME_FROM: "1"
-      WAIT_TIME_TO: "2"
+      WAIT_TIME_FROM: "0"
+      WAIT_TIME_TO: "0"
     volumes:
       - ./report:/report:z
       - ./baseline:/baseline:z
