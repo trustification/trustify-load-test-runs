@@ -17,6 +17,7 @@ services:
       POSTGRES_PASSWORD: "eggs"
       POSTGRES_DB: "trustify"
     restart: always
+    shm_size: 1G
     deploy:
       resources:
         reservations:
@@ -78,10 +79,37 @@ services:
     entrypoint: /usr/bin/bash
     command: /init-sso/init.sh
 
-  trustify-migrate:
+  replay-dump:
     depends_on:
       postgres:
         condition: service_healthy
+
+    image: docker.io/library/postgres:16
+
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: eggs
+      PGHOST: postgres
+      PGDATABASE: trustify
+    command:
+      - bash
+      - -exc
+      - |
+        echo "Installing curl"
+        
+        apt-get update
+        env DEBIAN_FRONTEND=noninteractive apt-get install curl -y
+        
+        echo "Importing dump"
+        
+        curl -sSL https://trustify-dumps.dentrassi.de/dump.sql.gz -o dump.sql.gz
+        zcat dump.sql.gz | psql
+        echo "VACUUM ANALYZE; REINDEX database trustify;" | psql
+
+  trustify-migrate:
+    depends_on:
+      replay-dump:
+        condition: service_completed_successfully
     build:
       dockerfile: ./Containerfile.trustify
     environment:
@@ -100,8 +128,12 @@ services:
         condition: service_completed_successfully
       init-keycloak:
         condition: service_completed_successfully
+      replay-dump:
+        condition: service_completed_successfully
+
     build:
       dockerfile: ./Containerfile.trustify
+
     environment:
       TRUSTD_DB_USER: postgres
       TRUSTD_DB_PASSWORD: eggs
@@ -149,7 +181,7 @@ services:
       - --host
       - http://trustify:8080
       - -u
-      - "3"
+      - "2"
       - --run-time
       - "5m"
       - --report-file
@@ -158,3 +190,5 @@ services:
       - /report/report.json
       - --baseline-file
       - /baseline/baseline.json
+      - --scenarios
+      - WebsiteUser,RestAPIUser
