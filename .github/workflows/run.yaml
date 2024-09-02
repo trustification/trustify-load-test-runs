@@ -90,7 +90,7 @@ jobs:
           
           pushd repo/publish/reports
           
-          tree -H 'reports' --charset utf-8 -I index.html -L 1 -P "*.html" -D -o ../index.html --houtro ""
+          tree -H 'reports' --charset utf-8 -I index.html -L 1 --sort ctime -r -P "*.html" -D -o ../index.html --houtro ""
           
           popd
           
