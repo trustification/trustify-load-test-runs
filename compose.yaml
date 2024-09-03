@@ -183,7 +183,7 @@ services:
       - --host
       - http://trustify:8080
       - -u
-      - "2"
+      - "5"
       - --run-time
       - "5m"
       - --report-file
@@ -193,4 +193,4 @@ services:
       - --baseline-file
       - /baseline/baseline.json
       - --scenarios
-      - WebsiteUser,RestAPIUser
+      - RestAPIUser
