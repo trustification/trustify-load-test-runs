@@ -24,7 +24,7 @@
     "phone"
   ],
   "attributes": {
-    "access.token.lifespan": "300",
+    "access.token.lifespan": "86400",
     "post.logout.redirect.uris": "+"
   }
 }
