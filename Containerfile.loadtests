@@ -12,8 +12,7 @@ RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain 1.80.1
 
 RUN git clone https://github.com/trustification/scale-testing --depth 1
 
-RUN cd scale-testing/loadtests && cargo build --release --bin loadtest
-#RUN find trustify/target
-RUN install scale-testing/loadtests/target/release/loadtest /usr/local/bin/loadtest
+RUN cd loadtests && cargo build --release --bin loadtest
+RUN install loadtests/target/release/loadtest /usr/local/bin/loadtest
 
 ENTRYPOINT ["/usr/local/bin/loadtest"]
