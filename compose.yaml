@@ -102,7 +102,7 @@ services:
         
         echo "Importing dump"
         
-        curl -sSL https://trustify-dumps.dentrassi.de/dump.sql.gz -o dump.sql.gz
+        curl --retry 50 --retry-max-time 3600 -sSL https://trustify-dumps.dentrassi.de/dump.sql.gz -o dump.sql.gz
         zcat dump.sql.gz | psql
         echo "VACUUM ANALYZE; REINDEX database trustify;" | psql
 
