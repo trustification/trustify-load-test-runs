@@ -140,6 +140,7 @@ services:
       TRUSTD_DB_HOST: postgres
       TRUSTD_DB_NAME: trustify
       RUST_LOG: info
+      NO_COLOR: "true"
       INFRASTRUCTURE_ENABLED: "true"
       HTTP_SERVER_BIND_ADDR: "::"
       UI_ISSUER_URL: http://keycloak:8080/realms/trustify
