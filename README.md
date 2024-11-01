@@ -4,6 +4,12 @@ The goal is to have load tests, which can be re-run over time to see the evoluti
 
 ## Running it locally
 
+After clone, run:
+
+```bash
+cp publish/baseline.json baseline/
+```
+
 Build the containers once:
 
 ```bash
