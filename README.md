@@ -27,3 +27,12 @@ After the test has run, clean up:
 ```bash
 podman compose -f compose.yaml down
 ```
+
+## Wait, there is more
+
+### Start a DB instance with an imported dump
+
+```bash
+podman compose -f compose.yaml build
+podman compose -f compose.yaml up trustify-migrate
+```
