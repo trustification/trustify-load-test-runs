@@ -42,7 +42,7 @@ jobs:
         working-directory: run
         run: |
           mkdir baseline
-          cp publish/baseline.json baseline/ 
+          cp publish/baseline.json baseline/
 
       - name: Build Containers
         working-directory: run
@@ -96,27 +96,27 @@ jobs:
           SOURCE: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         run: |
           git clone "$SOURCE" repo
-          
+
           DATE=$(date +"%Y-%m-%dT%H-%M-%S")
           cp run/report/report.html repo/publish/reports/report-${DATE}.html
           cp run/report/report.json repo/publish/reports/report-${DATE}.json
           cp run/report/report.json repo/publish/baseline.json
-          
+
           pushd repo/publish/reports
-          
+
           ls -la
           tree -H 'reports' --charset utf-8 -I index.html -L 1 --sort ctime -r -P "*.html" -D -o ../index.html --houtro ""
-          
+
           popd
-          
+
           cd repo
-          
+
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
+
           git add -A -- publish
           git commit -m "Automatic update ($GITHUB_RUN_ID/$GITHUB_RUN_NUMBER)"
-          
+
           git push
 
       - name: Setup Pages
