@@ -10,7 +10,7 @@
 
 services:
   postgres:
-    image: docker.io/library/postgres:16
+    image: docker.io/library/postgres:17
     ports:
       - "5432:5432"
     environment:
@@ -41,6 +41,7 @@ services:
       - KEYCLOAK_ENABLE_HEALTH_ENDPOINTS=true
       - KEYCLOAK_CACHE_TYPE=local
       - KEYCLOAK_PROXY=edge
+      - JAVA_OPTS=-Xms128m -Xmx512m
     ports:
       - "8090:8080"
     deploy:
@@ -84,7 +85,7 @@ services:
       postgres:
         condition: service_healthy
 
-    image: docker.io/library/postgres:16
+    image: docker.io/library/postgres:17
 
     environment:
       PGUSER: postgres
@@ -96,12 +97,12 @@ services:
       - -exc
       - |
         echo "Installing curl"
-        
+
         apt-get update
         env DEBIAN_FRONTEND=noninteractive apt-get install curl -y
-        
+
         echo "Importing dump"
-        
+
         curl --retry 50 --retry-max-time 3600 -sSL https://serve-trustify-dumps.apps.cluster.trustification.rocks/20241208T001823Z/dump.sql.gz -o dump.sql.gz
         zcat dump.sql.gz | psql -v ON_ERROR_STOP=1
         echo "VACUUM ANALYZE; REINDEX database trustify;" | psql
