@@ -102,8 +102,7 @@ services:
         env DEBIAN_FRONTEND=noninteractive apt-get install curl -y
 
         echo "Importing dump"
-
-        curl --retry 50 --retry-max-time 3600 -sSL https://serve-trustify-dumps.apps.cluster.trustification.rocks/20241208T001823Z/dump.sql.gz -o dump.sql.gz
+        curl --retry 50 --retry-max-time 3600 -sSL https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250211T111259Z/dump.sql.gz -o dump.sql.gz
         zcat dump.sql.gz | psql -v ON_ERROR_STOP=1
         echo "VACUUM ANALYZE; REINDEX database trustify;" | psql
 
