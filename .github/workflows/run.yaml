@@ -57,7 +57,7 @@ jobs:
       - if: always()
         working-directory: run
         run: |
-          docker compose -f compose.yaml logs -t > containers.log
+          docker compose -f compose.yaml logs > containers.log
 
       - name: Cleanup
         working-directory: run
