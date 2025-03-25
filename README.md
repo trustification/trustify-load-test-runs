@@ -32,6 +32,8 @@ podman compose -f compose.yaml down
 
 ### Start a DB instance with an imported dump
 
+To start up a database instance with the imported dump, run the following commands:
+
 ```bash
 podman compose -f compose.yaml build
 podman compose -f compose.yaml up trustify-migrate

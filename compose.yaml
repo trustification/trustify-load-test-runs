@@ -102,6 +102,7 @@ services:
         env DEBIAN_FRONTEND=noninteractive apt-get install curl -y
 
         echo "Importing dump"
+        # align with the SCENARIO_FILE variable below
         curl --retry 50 --retry-max-time 3600 -sSL https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250303T070258Z/dump.sql.gz -o dump.sql.gz
         zcat dump.sql.gz | psql -v ON_ERROR_STOP=1
         echo "VACUUM ANALYZE; REINDEX database trustify;" | psql
@@ -177,6 +178,7 @@ services:
       CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP # notsecret
       WAIT_TIME_FROM: "0"
       WAIT_TIME_TO: "0"
+      SCENARIO_FILE: "/usr/local/share/scenarios/full-20250323"
     volumes:
       - ./report:/report:z
       - ./baseline:/baseline:z
