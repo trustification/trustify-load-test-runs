@@ -178,7 +178,7 @@ services:
       CLIENT_SECRET: R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP # notsecret
       WAIT_TIME_FROM: "0"
       WAIT_TIME_TO: "0"
-      SCENARIO_FILE: "/usr/local/share/scenarios/full-20250323"
+      SCENARIO_FILE: "/usr/local/share/scenarios/full-20250323.json5"
     volumes:
       - ./report:/report:z
       - ./baseline:/baseline:z
