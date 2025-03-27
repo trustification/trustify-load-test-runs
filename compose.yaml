@@ -193,6 +193,8 @@ services:
       - /report/report.html
       - --report-file
       - /report/report.json
+      - --report-file
+      - /report/report.md
       - --baseline-file
       - /baseline/baseline.json
       - --scenarios
