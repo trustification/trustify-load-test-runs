@@ -2,6 +2,7 @@
 //   -> sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081
 {
   "get_sbom": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
+  "sbom_by_package": "pkg:maven/io.quarkus/quarkus-smallrye-metrics@2.13.8.Final-redhat-00004?type=jar&repository_url=https%3a%2f%2fmaven.repository.redhat.com%2fga%2f",
   // FIXME: Disabled due to bad performance, blocks the whole test
   "get_sbom_advisories": null,
   "get_sbom_packages": null,
