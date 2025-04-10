@@ -15,8 +15,13 @@ RUN ["bash", "-c", "\
     git clone https://github.com/trustification/trustify ; \
     if [[ -n \"$rev\" ]]; then \
         cd trustify ; \
-        git config --add remote.origin.fetch "+refs/pull/*/head:refs/remotes/origin/*" ; \
+        # update the fetch configuration for the origin remote, instructing Git to fetch pull request data: \
+        # +refs/pull/*/head specifies that Git should fetch the head of all pull requests \
+        # refs/remotes/origin/pr/* tells Git to store these heads in a local ref path that can be checked out easily by PR number \
+        git config --add remote.origin.fetch \"+refs/pull/*/head:refs/remotes/origin/*\" ; \
+        # pull all PR data into local repository under the refs specified above \
         git fetch origin ; \
+        # leveraging the configuration above, 'rev' can be a branch name, commit digest or a PR number \
         git checkout \"$rev\" ; \
     fi \
 "]
