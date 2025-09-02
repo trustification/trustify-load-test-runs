@@ -12,7 +12,7 @@ RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain 1.87.0
 
 ARG rev
 RUN ["bash", "-c", "\
-    git clone https://github.com/trustification/trustify ; \
+    git clone https://github.com/guacsec/trustify ; \
     if [[ -n \"$rev\" ]]; then \
         cd trustify ; \
         # update the fetch configuration for the origin remote, instructing Git to fetch pull request data: \
