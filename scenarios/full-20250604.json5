@@ -13,4 +13,5 @@
   // "get_vulnerability": "CVE-2023-39325",
   "sbom_license_ids": "urn:uuid:01973124-d4ab-7163-b104-331632a21144",
   "analyze_purl": "pkg:rpm/redhat/eap7-activemq-artemis-native@1.0.2-3.redhat_00004.1.el7eap?arch=noarch&epoch=1",
+  "get_purl_details": "b00df2ca-df21-5c10-8874-304e9c54e2bd",
 }
