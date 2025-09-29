@@ -15,7 +15,8 @@
     "roles",
     "web-origins",
     "create:document",
-    "read:document"
+    "read:document",
+    "delete:document"
   ],
   "optionalClientScopes": [
     "address",
