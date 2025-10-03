@@ -6,7 +6,18 @@ set -exo pipefail
 
 trap break INT
 
-kcadm() { local cmd="$1" ; shift ; "$KCADM_PATH" "$cmd" --config /tmp/kcadm.config "$@" ; }
+kcadm() {
+  local cmd="$1"
+  shift
+  case "$cmd" in
+    "config")
+      "$KCADM_PATH" "$cmd" --config /tmp/kcadm.config "$@"
+      ;;
+    *)
+      "$KCADM_PATH" "$cmd" --config /tmp/kcadm.config --server "$KEYCLOAK_URL" --realm master --user "$KEYCLOAK_ADMIN" --password "$KEYCLOAK_ADMIN_PASSWORD" "$@"
+      ;;
+  esac
+}
 
 die() {
     echo "$*" 1>&2
@@ -14,7 +25,7 @@ die() {
 }
 
 # TODO: once podman compose works, stop polling
-while ! kcadm config credentials config --server "$KEYCLOAK_URL" --realm master --user "$KEYCLOAK_ADMIN" --password "$KEYCLOAK_ADMIN_PASSWORD" &> /dev/null; do
+while ! kcadm config credentials --server "$KEYCLOAK_URL" --realm master --user "$KEYCLOAK_ADMIN" --password "$KEYCLOAK_ADMIN_PASSWORD"; do
   echo "Waiting for Keycloak to start up..."
   sleep 5
 done
@@ -60,7 +71,7 @@ kcadm create roles -r "${REALM}" -s name=chicken-admin || true
 # add chicken-user as default role
 kcadm add-roles -r "${REALM}" --rname "default-roles-${REALM}" --rolename chicken-user
 
-MANAGER_ID=$(kcadm get roles -r "${REALM}" --fields id,name --format csv --noquotes | grep ",chicken-manager" | awk -F ',' '{print $1}')
+MANAGER_ID=$(kcadm get roles -r "${REALM}" --fields id,name --format csv --noquotes | grep ",chicken-manager" | cut -d ',' -f 1)
 
 # create scopes
 # shellcheck disable=SC2043
@@ -70,7 +81,7 @@ done
 
 for i in create:document delete:document; do
 kcadm create client-scopes -r "${REALM}" -s "name=$i" -s protocol=openid-connect || true
-ID=$(kcadm get client-scopes -r "${REALM}" --fields id,name --format csv --noquotes | grep ",${i}" | awk -F ',' '{print $1}')
+ID=$(kcadm get client-scopes -r "${REALM}" --fields id,name --format csv --noquotes | grep ",${i}" | cut -d ',' -f 1)
 # add all scopes to the chicken-manager
 kcadm create "client-scopes/${ID}/scope-mappings/realm" -r "${REALM}" -b '[{"name":"chicken-manager", "id":"'"${MANAGER_ID}"'"}]' || true
 done
