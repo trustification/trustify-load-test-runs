@@ -38,3 +38,10 @@ To start up a database instance with the imported dump, run the following comman
 podman compose -f compose.yaml build
 podman compose -f compose.yaml up trustify-migrate
 ```
+
+## Excluding Bad Reports
+
+1. Add filename to `publish/excluded-reports.txt`:  
+   `report-2024-09-03T07-38-09.json`  # Wrong configuration - invalid dump
+2. Run `./generate-manifest.sh` to regenerate the manifest
+3. Open a PR to push the changes
