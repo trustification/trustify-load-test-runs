@@ -1,0 +1,20 @@
+# Excluded Reports
+# List one filename per line (without the 'reports/' prefix)
+# Lines starting with # are comments and will be ignored
+#
+# Format: report-YYYY-MM-DDTHH-MM-SS.json
+# Reason for exclusion should be documented here
+#
+# Example:
+# report-2024-09-03T07-38-09.json  # Wrong configuration - invalid database dump
+# report-2024-09-03T01-55-43.json  # Wrong configuration - incorrect scenario file
+
+# Add excluded report filenames below (one per line):
+report-2024-09-02T15-27-56.json
+report-2024-09-03T01-55-43.json
+report-2024-09-03T07-38-09.json
+report-2025-02-11T03-43-30.json
+report-2025-02-11T13-25-52.json
+report-2025-02-12T03-42-47.json
+report-2025-03-18T03-02-23.json
+report-2025-04-09T15-54-58.json

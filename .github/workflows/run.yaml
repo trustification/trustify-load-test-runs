@@ -111,6 +111,9 @@ jobs:
 
           cd repo
 
+          chmod +x generate-manifest.sh
+          ./generate-manifest.sh
+
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
