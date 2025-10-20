@@ -635,12 +635,12 @@
             const latest = allReports[allReports.length - 1].data;
 
             const endpoints = latest.raw_request_metrics
-                .filter(m => m.name !== 'Aggregated')
-                .sort((a, b) => b.response_time_average.value - a.response_time_average.value)
+                .filter(m => m.name !== 'Aggregated' && m.response_time_average?.value !== undefined)
+                .sort((a, b) => (b.response_time_average?.value || 0) - (a.response_time_average?.value || 0))
                 .slice(0, 10);
 
             const labels = endpoints.map(e => e.name.substring(0, 40) + (e.name.length > 40 ? '...' : ''));
-            const data = endpoints.map(e => e.response_time_average.value);
+            const data = endpoints.map(e => e.response_time_average?.value || 0);
 
             charts.slowest = new Chart(ctx, {
                 type: 'bar',
@@ -685,26 +685,33 @@
                 .sort((a, b) => a.name.localeCompare(b.name));
 
             container.innerHTML = endpoints.map(ep => {
-                const delta = ep.response_time_average.delta;
+                // Safely access all values with null checks
+                const avgValue = ep.response_time_average?.value;
+                const minValue = ep.response_time_minimum?.value;
+                const maxValue = ep.response_time_maximum?.value;
+                const requestsValue = ep.number_of_requests?.value;
+                const rpsValue = ep.requests_per_second?.value;
+                const delta = ep.response_time_average?.delta;
+
                 const trendIcon = delta > 0 ? '↑' : delta < 0 ? '↓' : '→';
                 const trendColor = delta > 0 ? '#f56565' : delta < 0 ? '#48bb78' : '#666';
 
                 return `
                     <div class="endpoint-card">
-                        <div class="endpoint-name">${ep.method} ${ep.name}</div>
+                        <div class="endpoint-name">${ep.method || ''} ${ep.name}</div>
                         <div class="endpoint-stats">
-                            <span>Avg: ${ep.response_time_average.value.toFixed(2)}ms</span>
+                            <span>Avg: ${avgValue !== undefined ? avgValue.toFixed(2) + 'ms' : 'N/A'}</span>
                             <span style="color: ${trendColor}">
-                                ${trendIcon} ${Math.abs(delta || 0).toFixed(2)}ms
+                                ${delta !== undefined ? trendIcon + ' ' + Math.abs(delta).toFixed(2) + 'ms' : ''}
                             </span>
                         </div>
                         <div class="endpoint-stats">
-                            <span>Min: ${ep.response_time_minimum.value}ms</span>
-                            <span>Max: ${ep.response_time_maximum.value}ms</span>
+                            <span>Min: ${minValue !== undefined ? minValue + 'ms' : 'N/A'}</span>
+                            <span>Max: ${maxValue !== undefined ? maxValue + 'ms' : 'N/A'}</span>
                         </div>
                         <div class="endpoint-stats">
-                            <span>Requests: ${ep.number_of_requests.value}</span>
-                            <span>RPS: ${ep.requests_per_second.value.toFixed(2)}</span>
+                            <span>Requests: ${requestsValue !== undefined ? requestsValue : 'N/A'}</span>
+                            <span>RPS: ${rpsValue !== undefined ? rpsValue.toFixed(2) : 'N/A'}</span>
                         </div>
                     </div>
                 `;
