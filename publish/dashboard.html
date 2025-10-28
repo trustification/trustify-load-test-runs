@@ -105,6 +105,43 @@
             height: 400px;
         }
 
+        .date-range-selector {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .date-range-selector label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .date-range-selector select {
+            padding: 8px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            min-width: 150px;
+        }
+
+        .date-range-selector select:hover {
+            border-color: #667eea;
+        }
+
+        .date-range-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
         .controls {
             background: white;
             padding: 20px;
@@ -199,6 +236,16 @@
         <p>Performance trends and metrics over time</p>
     </div>
 
+    <div class="date-range-selector">
+        <label for="dateRangeSelect">Time Range:</label>
+        <select id="dateRangeSelect">
+            <option value="all">All Time</option>
+            <option value="3months">Last 3 Months</option>
+            <option value="1month">Last Month</option>
+            <option value="1week">Last Week</option>
+        </select>
+    </div>
+
     <div id="loading" class="loading">Loading test data...</div>
     <div id="error" class="error" style="display: none;"></div>
 
@@ -278,7 +325,53 @@
 
     <script>
         let allReports = [];
+        let filteredReports = [];
         let charts = {};
+
+        // Get filtered reports based on selected date range
+        function getFilteredReports() {
+            const dateRange = document.getElementById('dateRangeSelect').value;
+
+            if (dateRange === 'all' || allReports.length === 0) {
+                return allReports;
+            }
+
+            // Calculate the cutoff date based on the latest report
+            const latestTimestamp = allReports[allReports.length - 1].timestamp;
+            const cutoffDate = new Date(latestTimestamp);
+
+            switch (dateRange) {
+                case '1week':
+                    cutoffDate.setDate(cutoffDate.getDate() - 7);
+                    break;
+                case '1month':
+                    cutoffDate.setMonth(cutoffDate.getMonth() - 1);
+                    break;
+                case '3months':
+                    cutoffDate.setMonth(cutoffDate.getMonth() - 3);
+                    break;
+            }
+
+            return allReports.filter(report => report.timestamp >= cutoffDate);
+        }
+
+        // Refresh all charts and stats with current filter
+        function refreshDashboard() {
+            filteredReports = getFilteredReports();
+
+            if (filteredReports.length === 0) {
+                console.warn('No reports match the selected date range');
+                return;
+            }
+
+            updateSummaryStats();
+            populateEndpointDropdown();
+            updateResponseTimeChart();
+            updateRequestVolumeChart();
+            updateEndpointChart();
+            updateSlowestEndpointsChart();
+            updateEndpointsList();
+        }
 
         // Fetch all report files
         async function loadReports() {
@@ -317,6 +410,9 @@
 
                 console.log(`Loaded ${allReports.length} reports`);
 
+                // Initialize filtered reports to all reports
+                filteredReports = allReports;
+
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
 
@@ -346,16 +442,17 @@
             updateEndpointsList();
 
             // Add event listeners
+            document.getElementById('dateRangeSelect').addEventListener('change', refreshDashboard);
             document.getElementById('endpointSelect').addEventListener('change', updateEndpointChart);
             document.getElementById('metricSelect').addEventListener('change', updateEndpointChart);
         }
 
         function updateSummaryStats() {
-            const latest = allReports[allReports.length - 1].data;
-            const previous = allReports.length > 1 ? allReports[allReports.length - 2].data : null;
+            const latest = filteredReports[filteredReports.length - 1].data;
+            const previous = filteredReports.length > 1 ? filteredReports[filteredReports.length - 2].data : null;
 
             // Total runs
-            document.getElementById('totalRuns').textContent = allReports.length;
+            document.getElementById('totalRuns').textContent = filteredReports.length;
 
             // Latest avg response time
             const aggregated = latest.raw_request_metrics?.find(m => m.name === 'Aggregated');
@@ -391,13 +488,18 @@
         }
 
         function populateEndpointDropdown() {
-            const latest = allReports[allReports.length - 1].data;
+            const latest = filteredReports[filteredReports.length - 1].data;
             const endpoints = latest.raw_request_metrics
                 .filter(m => m.name !== 'Aggregated')
                 .map(m => ({ method: m.method, name: m.name }))
                 .sort((a, b) => a.name.localeCompare(b.name));
 
             const select = document.getElementById('endpointSelect');
+            // Clear existing options except the first one (Aggregated)
+            while (select.options.length > 1) {
+                select.remove(1);
+            }
+
             endpoints.forEach(ep => {
                 const option = document.createElement('option');
                 option.value = ep.name;
@@ -408,19 +510,13 @@
 
         function createResponseTimeChart() {
             const ctx = document.getElementById('responseTimeChart').getContext('2d');
-            const labels = allReports.map(r => r.date);
-            const aggregatedData = allReports.map(r => {
-                const agg = r.data.raw_request_metrics?.find(m => m.name === 'Aggregated');
-                return agg ? agg.response_time_average.value : null;
-            });
-
             charts.responseTime = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: [],
                     datasets: [{
                         label: 'Average Response Time (ms)',
-                        data: aggregatedData,
+                        data: [],
                         borderColor: '#667eea',
                         backgroundColor: 'rgba(102, 126, 234, 0.1)',
                         tension: 0.4,
@@ -457,23 +553,32 @@
                     }
                 }
             });
+            updateResponseTimeChart();
+        }
+
+        function updateResponseTimeChart() {
+            if (!charts.responseTime) return;
+
+            const labels = filteredReports.map(r => r.date);
+            const aggregatedData = filteredReports.map(r => {
+                const agg = r.data.raw_request_metrics?.find(m => m.name === 'Aggregated');
+                return agg ? agg.response_time_average.value : null;
+            });
+
+            charts.responseTime.data.labels = labels;
+            charts.responseTime.data.datasets[0].data = aggregatedData;
+            charts.responseTime.update();
         }
 
         function createRequestVolumeChart() {
             const ctx = document.getElementById('requestVolumeChart').getContext('2d');
-            const labels = allReports.map(r => r.date);
-            const requestData = allReports.map(r => {
-                const agg = r.data.raw_request_metrics?.find(m => m.name === 'Aggregated');
-                return agg ? agg.number_of_requests.value : null;
-            });
-
             charts.requestVolume = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: [],
                     datasets: [{
                         label: 'Total Requests',
-                        data: requestData,
+                        data: [],
                         backgroundColor: 'rgba(72, 187, 120, 0.7)',
                         borderColor: '#48bb78',
                         borderWidth: 2
@@ -505,6 +610,21 @@
                     }
                 }
             });
+            updateRequestVolumeChart();
+        }
+
+        function updateRequestVolumeChart() {
+            if (!charts.requestVolume) return;
+
+            const labels = filteredReports.map(r => r.date);
+            const requestData = filteredReports.map(r => {
+                const agg = r.data.raw_request_metrics?.find(m => m.name === 'Aggregated');
+                return agg ? agg.number_of_requests.value : null;
+            });
+
+            charts.requestVolume.data.labels = labels;
+            charts.requestVolume.data.datasets[0].data = requestData;
+            charts.requestVolume.update();
         }
 
         function createEndpointChart() {
@@ -555,8 +675,8 @@
 
             console.log('Updating chart for endpoint:', endpointName, 'metric:', metric);
 
-            const labels = allReports.map(r => r.date);
-            const data = allReports.map(r => {
+            const labels = filteredReports.map(r => r.date);
+            const data = filteredReports.map(r => {
                 const endpoint = r.data.raw_request_metrics?.find(m => m.name === endpointName);
                 if (!endpoint) {
                     return null;
@@ -633,23 +753,13 @@
 
         function createSlowestEndpointsChart() {
             const ctx = document.getElementById('slowestEndpointsChart').getContext('2d');
-            const latest = allReports[allReports.length - 1].data;
-
-            const endpoints = latest.raw_request_metrics
-                .filter(m => m.name !== 'Aggregated' && m.response_time_average?.value !== undefined)
-                .sort((a, b) => (b.response_time_average?.value || 0) - (a.response_time_average?.value || 0))
-                .slice(0, 10);
-
-            const labels = endpoints.map(e => e.name.substring(0, 40) + (e.name.length > 40 ? '...' : ''));
-            const data = endpoints.map(e => e.response_time_average?.value || 0);
-
             charts.slowest = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: [],
                     datasets: [{
                         label: 'Average Response Time (ms)',
-                        data: data,
+                        data: [],
                         backgroundColor: 'rgba(245, 101, 101, 0.7)',
                         borderColor: '#f56565',
                         borderWidth: 2
@@ -675,10 +785,29 @@
                     }
                 }
             });
+            updateSlowestEndpointsChart();
+        }
+
+        function updateSlowestEndpointsChart() {
+            if (!charts.slowest) return;
+
+            const latest = filteredReports[filteredReports.length - 1].data;
+
+            const endpoints = latest.raw_request_metrics
+                .filter(m => m.name !== 'Aggregated' && m.response_time_average?.value !== undefined)
+                .sort((a, b) => (b.response_time_average?.value || 0) - (a.response_time_average?.value || 0))
+                .slice(0, 10);
+
+            const labels = endpoints.map(e => e.name.substring(0, 40) + (e.name.length > 40 ? '...' : ''));
+            const data = endpoints.map(e => e.response_time_average?.value || 0);
+
+            charts.slowest.data.labels = labels;
+            charts.slowest.data.datasets[0].data = data;
+            charts.slowest.update();
         }
 
         function updateEndpointsList() {
-            const latest = allReports[allReports.length - 1].data;
+            const latest = filteredReports[filteredReports.length - 1].data;
             const container = document.getElementById('endpointsList');
 
             const endpoints = latest.raw_request_metrics
