@@ -120,5 +120,36 @@
     "urn:uuid:01973122-3bdd-78a3-898a-fb67c06387ed"
   ],
   "download_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
-  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89"
+  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
+  "upload_advisory_files": [
+    "./test-data/advisories/rhba-2024_11525.json.xz",
+    "./test-data/advisories/rhba-2024_11565.json.xz",
+    "./test-data/advisories/rhba-2025_0304.json.xz",
+    "./test-data/advisories/rhba-2025_0305.json.xz",
+    "./test-data/advisories/rhba-2025_0409.json.xz",
+    "./test-data/advisories/rhba-2025_0725.json.xz",
+    "./test-data/advisories/rhba-2025_1079.json.xz",
+    "./test-data/advisories/rhba-2025_1597.json.xz",
+    "./test-data/advisories/rhba-2025_1598.json.xz",
+    "./test-data/advisories/rhba-2025_1599.json.xz",
+    "./test-data/advisories/rhba-2025_1600.json.xz",
+    "./test-data/advisories/rhba-2025_2428.json.xz",
+    "./test-data/advisories/rhba-2025_2973.json.xz",
+    "./test-data/advisories/rhba-2025_2991.json.xz",
+    "./test-data/advisories/rhba-2025_4872.json.xz",
+    "./test-data/advisories/rhba-2025_5309.json.xz",
+    "./test-data/advisories/rhba-2025_6314.json.xz",
+    "./test-data/advisories/rhba-2025_6470.json.xz",
+    "./test-data/advisories/rhba-2025_6597.json.xz",
+    "./test-data/advisories/rhba-2025_6631.json.xz",
+    "./test-data/advisories/rhba-2025_9433.json.xz",
+    "./test-data/advisories/rhba-2025_9645.json.xz",
+    "./test-data/advisories/rhba-2025_12877.json.xz",
+    "./test-data/advisories/rhba-2025_14817.json.xz",
+    "./test-data/advisories/rhba-2025_15694.json.xz",
+    "./test-data/advisories/rhba-2025_15714.json.xz",
+    "./test-data/advisories/rhba-2025_15878.json.xz",
+    "./test-data/advisories/rhba-2025_16983.json.xz",
+    "./test-data/advisories/rhba-2025_16984.json.xz"
+  ]
 }
